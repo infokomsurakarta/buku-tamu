@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Buku Tamu Digital - Balai POM di Surakarta</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            main { padding: 0; }
+            .shadow-sm, .shadow-md { box-shadow: none !important; }
+            .border { border: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+
+    <!-- Kop Instansi Balai POM di Surakarta -->
+    <header class="bg-white border-b-4 border-emerald-600 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                
+                <!-- Logo & Identitas Kop -->
+                <div class="flex items-center gap-4 text-center sm:text-left">
+                    <img src="https://lh3.googleusercontent.com/d/1rW-AVfUg8WQ6263JE4gd4AKm3nuEKDKq" 
+                         alt="Logo BPOM" 
+                         class="w-20 h-20 object-contain shrink-0">
+                    
+                    <div>
+                        <h2 class="text-xs sm:text-sm font-semibold text-slate-600 tracking-wider uppercase">BADAN PENGAWAS OBAT DAN MAKANAN</h2>
+                        <h1 class="text-xl sm:text-2xl font-extrabold text-emerald-800 tracking-tight uppercase">BALAI POM DI SURAKARTA</h1>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Jl. Siwalan No. 59 d Kerten Laweyan, Kota Surakarta, Jawa Tengah 57154
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Telepon: (0271) 7788090, Fax: (0271) 7788090 | Email: <span class="text-indigo-600">bpom_surakarta@pom.go.id</span> | Website: <span class="text-indigo-600">surakarta.pom.go.id</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi Header -->
+                <div class="no-print flex items-center gap-2">
+                    <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-800 text-white text-sm font-medium py-2 px-3 rounded-lg transition flex items-center gap-1.5 shadow-sm">
+                        <i data-lucide="printer" class="w-4 h-4"></i> Cetak
+                    </button>
+                    <button onclick="handleExportClick()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition flex items-center gap-1.5 shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i> Ekspor CSV
+                    </button>
+                    <!-- Tombol Auth Admin -->
+                    <button id="adminAuthBtn" onclick="toggleAdminAuth()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition flex items-center gap-1.5 shadow-sm">
+                        <i data-lucide="lock" class="w-4 h-4"></i> <span id="adminBtnText">Login Admin</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub Header Judul Aplikasi -->
+    <div class="bg-indigo-900 text-white py-3 shadow-inner no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-sm">
+            <span class="font-medium flex items-center gap-2">
+                <i data-lucide="book-open" class="w-4 h-4 text-emerald-400"></i> Sistem Pencatatan Kunjungan Buku Tamu Digital
+            </span>
+            <div class="flex items-center gap-3">
+                <span id="adminBadge" class="hidden bg-amber-400 text-slate-900 text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider flex items-center gap-1">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Mode Admin
+                </span>
+                <span id="liveClock" class="text-xs text-indigo-200 hidden sm:inline"></span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Dashboard / Ringkasan KPI -->
+	<div id="adminOnlySection" class="hidden space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 no-print">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Total Tamu Kunjungan</p>
+                    <p id="statTotal" class="text-3xl font-bold text-slate-800 mt-1">0</p>
+                </div>
+                <div class="p-3 bg-emerald-50 rounded-lg text-emerald-700">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Tamu Hari Ini</p>
+                    <p id="statToday" class="text-3xl font-bold text-emerald-600 mt-1">0</p>
+                </div>
+                <div class="p-3 bg-emerald-50 rounded-lg text-emerald-600">
+                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Instansi Unik</p>
+                    <p id="statInstansi" class="text-3xl font-bold text-indigo-600 mt-1">0</p>
+                </div>
+                <div class="p-3 bg-indigo-50 rounded-lg text-indigo-600">
+                    <i data-lucide="building" class="w-6 h-6"></i>
+                </div>
+            </div>
+        </div>
+	
+        <!-- Panel Grafik Demografi -->
+	
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 no-print">
+            <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-3">
+                <i data-lucide="pie-chart" class="w-5 h-5 text-indigo-600"></i> Analisis Demografi Tamu (SKM)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xs font-semibold uppercase text-slate-500 mb-2">Jenis Kelamin</h3>
+                    <div class="w-full h-48 relative">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xs font-semibold uppercase text-slate-500 mb-2">Tingkat Pendidikan</h3>
+                    <div class="w-full h-48 relative">
+                        <canvas id="eduChart"></canvas>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xs font-semibold uppercase text-slate-500 mb-2">Kelompok Usia</h3>
+                    <div class="w-full h-48 relative">
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Form Buku Tamu -->
+            <div class="lg:col-span-1 no-print">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 sticky top-8">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i data-lucide="user-plus" class="w-5 h-5 text-emerald-600"></i> Form Kedatangan Tamu
+                    </h2>
+                    <form id="guestForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Lengkap *</label>
+                            <input type="text" id="nama" name="nama" autocomplete="off" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: Dewi Sri">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jenis Kelamin *</label>
+                                <div class="flex items-center gap-3 mt-1.5">
+                                    <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
+                                        <input type="radio" name="gender" value="Laki-laki" required class="text-emerald-600 focus:ring-emerald-500">
+                                        <span class="ml-1">L</span>
+                                    </label>
+                                    <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
+                                        <input type="radio" name="gender" value="Perempuan" required class="text-emerald-600 focus:ring-emerald-500">
+                                        <span class="ml-1">P</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Umur (Thn) *</label>
+                                <input type="number" id="umur" min="1" max="120" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: 30">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pendidikan Terakhir *</label>
+                            <select id="pendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+                                <option value="">-- Pilih Pendidikan --</option>
+                                <option value="SD / Sederajat">SD / Sederajat</option>
+                                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
+                                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
+                                <option value="D4 / S1">D4 / S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp / Email *</label>
+                            <input type="text" id="kontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="081234567890 / email@domain.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan / Alamat *</label>
+                            <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT XYZ / Umum">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Keperluan Kunjungan *</label>
+                            <select id="keperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+                                <option value="">-- Pilih Jenis Keperluan --</option>
+                                <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi & Pengaduan (ULP)</option>
+                                <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
+                                <option value="Pengujian / Sampel">Pengujian / Sampel</option>
+                                <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
+                                <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Detail Keperluan / Ditemui</label>
+                            <textarea id="catatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Bertemu dengan tim substansi..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow-md">
+                            <i data-lucide="send" class="w-4 h-4"></i> Simpan Registrasi Tamu
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tabel Data Tamu -->
+	
+            <div class="lg:col-span-2 space-y-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6 no-print">
+                        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                            <i data-lucide="list" class="w-5 h-5 text-emerald-600"></i> Riwayat Kunjungan
+                        </h2>
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                            <input type="text" id="searchInput" oninput="renderData()" placeholder="Cari nama / instansi..." class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <select id="filterKeperluan" onchange="renderData()" class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+                                <option value="">Semua Keperluan</option>
+                                <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi (ULP)</option>
+                                <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
+                                <option value="Pengujian / Sampel">Pengujian / Sampel</option>
+                                <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
+                                <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200 text-xs font-semibold uppercase text-slate-600">
+                                    <th class="p-3">Waktu</th>
+                                    <th class="p-3">Tamu Profil</th>
+                                    <th class="p-3">Instansi</th>
+                                    <th class="p-3">Keperluan</th>
+                                    <th class="p-3 text-center no-print">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="guestTableBody" class="divide-y divide-slate-100 text-sm">
+                            </tbody>
+                        </table>
+                        <div id="emptyState" class="hidden text-center py-8 text-slate-400">
+                            <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-2 stroke-1"></i>
+                            <p>Belum ada riwayat kunjungan tamu.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+	
+        </div>
+    </main>
+
+    <!-- Modal Login Admin -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl border border-slate-200 max-w-sm w-full p-6 relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="shield-lock" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800">Autentikasi Admin</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan PIN Otentikasi untuk melanjutkan aksi ini.</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <input type="password" id="pinInput" maxlength="10" placeholder="Masukkan PIN" required class="w-full px-4 py-2.5 text-center tracking-widest text-lg font-bold border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <p id="loginError" class="text-xs text-red-600 text-center mt-1.5 hidden">PIN yang Anda masukkan salah!</p>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition flex items-center justify-center gap-2">
+                    <i data-lucide="key" class="w-4 h-4"></i> Konfirmasi PIN
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-200 mt-12 bg-white no-print">
+        &copy; Balai Pengawas Obat dan Makanan di Surakarta. All rights reserved.
+    </footer>
+
+    <script>
+    // Konfigurasi Admin
+    // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
+        
+    const ADMIN_PIN = "5010474"; // PIN Admin
+
+    let isAdminLoggedIn = false;
+    let pendingAdminAction = null; // Callback aksi setelah login berhasil
+
+    // Inisialisasi Data
+    let guests = JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
+    let chartGenderInstance = null;
+    let chartEduInstance = null;
+    let chartAgeInstance = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initCharts();
+        updateAdminView(); // Atur tampilan awal berdasarkan status login Admin
+        if (window.lucide) lucide.createIcons();
+        startLiveClock();
+    });
+
+    function startLiveClock() {
+        const clockEl = document.getElementById('liveClock');
+        if (!clockEl) return;
+        setInterval(() => {
+            const now = new Date();
+            clockEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ' - ' + now.toLocaleTimeString('id-ID') + ' WIB';
+        }, 1000);
+    }
+
+    // Fungsi Pengatur Tampilan Berdasarkan Status Admin
+    function updateAdminView() {
+        const adminOnlySection = document.getElementById('adminOnlySection');
+        const adminBadge = document.getElementById('adminBadge');
+        const adminBtnText = document.getElementById('adminBtnText');
+        const adminAuthBtn = document.getElementById('adminAuthBtn');
+
+        if (isAdminLoggedIn) {
+            if (adminOnlySection) adminOnlySection.classList.remove('hidden');
+            if (adminBadge) adminBadge.classList.remove('hidden');
+            if (adminBtnText) adminBtnText.innerText = "Logout Admin";
+            if (adminAuthBtn) {
+                adminAuthBtn.classList.replace('bg-indigo-600', 'bg-rose-600');
+                adminAuthBtn.classList.replace('hover:bg-indigo-700', 'hover:bg-rose-700');
+            }
+            renderData(); 
+        } else {
+            if (adminOnlySection) adminOnlySection.classList.add('hidden');
+            if (adminBadge) adminBadge.classList.add('hidden');
+            if (adminBtnText) adminBtnText.innerText = "Login Admin";
+            if (adminAuthBtn) {
+                adminAuthBtn.classList.replace('bg-rose-600', 'bg-indigo-600');
+                adminAuthBtn.classList.replace('hover:bg-rose-700', 'hover:bg-indigo-700');
+            }
+            const tbody = document.getElementById('guestTableBody');
+            if (tbody) tbody.innerHTML = '';
+        }
+    }
+
+    // System Login Modal Admin
+    function toggleAdminAuth() {
+        if (isAdminLoggedIn) {
+            isAdminLoggedIn = false;
+            updateAdminView();
+            alert("Anda telah keluar dari Mode Admin. Riwayat kunjungan disembunyikan.");
+        } else {
+            openLoginModal();
+        }
+    }
+
+    function openLoginModal(actionCallback = null) {
+        pendingAdminAction = actionCallback;
+        const modal = document.getElementById('loginModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.getElementById('pinInput').value = '';
+            document.getElementById('loginError').classList.add('hidden');
+            document.getElementById('pinInput').focus();
+        }
+    }
+
+    function closeLoginModal() {
+        const modal = document.getElementById('loginModal');
+        if (modal) modal.classList.add('hidden');
+        pendingAdminAction = null;
+    }
+
+    function handleLoginSubmit(e) {
+        e.preventDefault();
+        const inputPin = document.getElementById('pinInput').value;
+        if (inputPin === ADMIN_PIN) {
+            isAdminLoggedIn = true;
+            closeLoginModal();
+            updateAdminView();
+            if (pendingAdminAction) {
+                pendingAdminAction();
+                pendingAdminAction = null;
+            }
+        } else {
+            document.getElementById('loginError').classList.remove('hidden');
+        }
+    }
+
+    function handleExportClick() {
+        if (isAdminLoggedIn) {
+            exportToCSV();
+        } else {
+            openLoginModal(() => exportToCSV());
+        }
+    }
+
+    function handleDeleteClick(id) {
+        if (isAdminLoggedIn) {
+            deleteGuest(id);
+        } else {
+            openLoginModal(() => deleteGuest(id));
+        }
+    }
+
+    // Form Submit dengan Pengiriman Otomatis ke Google Sheets
+    document.getElementById('guestForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const genderSelected = document.querySelector('input[name="gender"]:checked');
+
+        const newGuest = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            nama: document.getElementById('nama').value.trim(),
+            gender: genderSelected ? genderSelected.value : '-',
+            umur: parseInt(document.getElementById('umur').value) || 0,
+            pendidikan: document.getElementById('pendidikan').value,
+            kontak: document.getElementById('kontak').value.trim() || '-',
+            instansi: document.getElementById('instansi').value.trim() || '-',
+            keperluan: document.getElementById('keperluan').value,
+            catatan: document.getElementById('catatan').value.trim() || '-'
+        };
+
+        // 1. Simpan ke LocalStorage
+        guests.unshift(newGuest);
+        localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+
+        // 2. Kirim Otomatis ke Google Sheets via Apps Script
+        if (SCRIPT_URL && SCRIPT_URL !== '') {
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newGuest)
+            }).catch(err => console.error("Gagal mengirim data ke Google Sheets:", err));
+        }
+
+        document.getElementById('guestForm').reset();
+        alert('Terima kasih! Data kunjungan Anda berhasil disimpan.');
+
+        if (isAdminLoggedIn) {
+            renderData();
+        }
+    });
+
+    function initCharts() {
+        const ctxGender = document.getElementById('genderChart')?.getContext('2d');
+        if (ctxGender) {
+            chartGenderInstance = new Chart(ctxGender, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Laki-laki', 'Perempuan'],
+                    datasets: [{ data: [0, 0], backgroundColor: ['#3b82f6', '#ec4899'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        const ctxEdu = document.getElementById('eduChart')?.getContext('2d');
+        if (ctxEdu) {
+            chartEduInstance = new Chart(ctxEdu, {
+                type: 'bar',
+                data: {
+                    labels: ['SD/SMP', 'SMA', 'D1-D3', 'D4/S1', 'S2/S3'],
+                    datasets: [{ label: 'Jumlah', data: [0, 0, 0, 0, 0], backgroundColor: '#10b981' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+            });
+        }
+
+        const ctxAge = document.getElementById('ageChart')?.getContext('2d');
+        if (ctxAge) {
+            chartAgeInstance = new Chart(ctxAge, {
+                type: 'pie',
+                data: {
+                    labels: ['< 20 th', '20-39 th', '40-59 th', '≥ 60 th'],
+                    datasets: [{ data: [0, 0, 0, 0], backgroundColor: ['#f59e0b', '#6366f1', '#14b8a6', '#64748b'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+    }
+
+    function updateCharts() {
+        if (!chartGenderInstance || !chartEduInstance || !chartAgeInstance) return;
+
+        const male = guests.filter(g => g.gender === 'Laki-laki').length;
+        const female = guests.filter(g => g.gender === 'Perempuan').length;
+        chartGenderInstance.data.datasets[0].data = [male, female];
+        chartGenderInstance.update();
+
+        const eduCounts = { 'SD/SMP': 0, 'SMA': 0, 'D1-D3': 0, 'D4/S1': 0, 'S2/S3': 0 };
+        guests.forEach(g => {
+            if (g.pendidikan === 'SD / Sederajat' || g.pendidikan === 'SMP / Sederajat') eduCounts['SD/SMP']++;
+            else if (g.pendidikan === 'SMA / SMK / Sederajat') eduCounts['SMA']++;
+            else if (g.pendidikan === 'D1 / D2 / D3') eduCounts['D1-D3']++;
+            else if (g.pendidikan === 'D4 / S1') eduCounts['D4/S1']++;
+            else if (g.pendidikan === 'S2' || g.pendidikan === 'S3') eduCounts['S2/S3']++;
+        });
+        chartEduInstance.data.datasets[0].data = Object.values(eduCounts);
+        chartEduInstance.update();
+
+        let ageGroup = [0, 0, 0, 0];
+        guests.forEach(g => {
+            const u = parseInt(g.umur) || 0;
+            if (u > 0 && u < 20) ageGroup[0]++;
+            else if (u >= 20 && u <= 39) ageGroup[1]++;
+            else if (u >= 40 && u <= 59) ageGroup[2]++;
+            else if (u >= 60) ageGroup[3]++;
+        });
+        chartAgeInstance.data.datasets[0].data = ageGroup;
+        chartAgeInstance.update();
+    }
+
+    function renderData() {
+        if (!isAdminLoggedIn) return;
+
+        const tbody = document.getElementById('guestTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+        const filter = document.getElementById('filterKeperluan')?.value || '';
+
+        if (!tbody) return;
+
+        const filteredGuests = guests.filter(g => {
+            const matchSearch = (g.nama || '').toLowerCase().includes(search) || (g.instansi || '').toLowerCase().includes(search);
+            const matchFilter = filter === '' || g.keperluan === filter;
+            return matchSearch && matchFilter;
+        });
+
+        tbody.innerHTML = '';
+        if (filteredGuests.length === 0) {
+            if (emptyState) emptyState.classList.remove('hidden');
+        } else {
+            if (emptyState) emptyState.classList.add('hidden');
+            filteredGuests.forEach(g => {
+                const dateObj = new Date(g.timestamp);
+                const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+                const genderBadge = g.gender === 'Laki-laki' 
+                    ? '<span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">L</span>' 
+                    : (g.gender === 'Perempuan' ? '<span class="text-pink-600 bg-pink-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">P</span>' : '');
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="p-3 text-slate-500 text-xs">
+                        <span class="font-semibold text-slate-700 block">${formattedDate}</span>
+                        ${formattedTime} WIB
+                    </td>
+                    <td class="p-3">
+                        <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                            ${escapeHtml(g.nama)} ${genderBadge}
+                        </div>
+                        <div class="text-xs text-slate-500">${g.umur ? g.umur + ' thn' : '-'} • ${escapeHtml(g.pendidikan || '-')}</div>
+                        <div class="text-xs text-slate-400 mt-0.5">${escapeHtml(g.kontak || '-')}</div>
+                    </td>
+                    <td class="p-3 text-slate-700 font-medium">${escapeHtml(g.instansi || '-')}</td>
+                    <td class="p-3">
+                        <span class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            ${escapeHtml(g.keperluan)}
+                        </span>
+                        ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
+                    </td>
+                    <td class="p-3 text-center no-print">
+                        <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
+                            <i data-lucide="edit-2" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="handleDeleteClick(${g.id})" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data (Butuh PIN Admin)">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        if (window.lucide) lucide.createIcons();
+        updateStats();
+        updateCharts();
+    }
+
+    function deleteGuest(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus catatan tamu ini?')) {
+            guests = guests.filter(g => g.id !== id);
+            localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+            renderData();
+        }
+    }
+
+    function updateStats() {
+        const totalEl = document.getElementById('statTotal');
+        const todayEl = document.getElementById('statToday');
+        const instansiEl = document.getElementById('statInstansi');
+
+        if (totalEl) totalEl.innerText = guests.length;
+
+        const todayStr = new Date().toDateString();
+        const todayCount = guests.filter(g => new Date(g.timestamp).toDateString() === todayStr).length;
+        if (todayEl) todayEl.innerText = todayCount;
+
+        const uniqueInstansi = new Set(guests.map(g => (g.instansi || '').toLowerCase().trim())).size;
+        if (instansiEl) instansiEl.innerText = uniqueInstansi;
+    }
+
+    function cleanCSVField(val) {
+        if (val === null || val === undefined) return '""';
+        const str = String(val).replace(/"/g, '""').replace(/[\r\n]+/g, ' ');
+        return `"${str}"`;
+    }
+
+    function exportToCSV() {
+        if (guests.length === 0) {
+            alert('Belum ada data kunjungan untuk diekspor!');
+            return;
+        }
+
+        const headers = ['Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur (Tahun)', 'Pendidikan Terakhir', 'Kontak/HP', 'Instansi/Alamat', 'Keperluan Kunjungan', 'Detail/Catatan'];
+        const csvRows = [headers.join(',')];
+
+        guests.forEach(g => {
+            const dateObj = new Date(g.timestamp);
+            const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            
+            const waktu = `${formattedDate} ${formattedTime} WIB`;
+
+            const row = [
+                cleanCSVField(waktu),
+                cleanCSVField(g.nama),
+                cleanCSVField(g.gender),
+                cleanCSVField(g.umur),
+                cleanCSVField(g.pendidikan),
+                cleanCSVField(g.kontak),
+                cleanCSVField(g.instansi),
+                cleanCSVField(g.keperluan),
+                cleanCSVField(g.catatan)
+            ];
+            csvRows.push(row.join(','));
+        });
+
+        const blob = new Blob(['\ufeff' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `buku_tamu_BPOM_Surakarta_${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(text) {
+        if (text === null || text === undefined) return '';
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function openEditModal(id) {
+        const guest = guests.find(g => g.id === id);
+        if (!guest) return;
+
+        document.getElementById('editGuestId').value = guest.id;
+        document.getElementById('editNama').value = guest.nama || '';
+        document.getElementById('editGender').value = guest.gender || 'Laki-laki';
+        document.getElementById('editUmur').value = guest.umur || '';
+        document.getElementById('editPendidikan').value = guest.pendidikan || 'S1';
+        document.getElementById('editKontak').value = guest.kontak || '';
+        document.getElementById('editInstansi').value = guest.instansi || '';
+        document.getElementById('editKeperluan').value = guest.keperluan || 'Layanan Informasi & Pengaduan (ULP)';
+        document.getElementById('editCatatan').value = guest.catatan || '';
+
+        const modal = document.getElementById('editModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+    }
+
+    function closeEditModal() {
+        const modal = document.getElementById('editModal');
+        if (modal) modal.classList.add('hidden');
+    }
+
+    // Fungsi Pemutakhiran Data (Edit)
+    function saveEdit(e) {
+    e.preventDefault();
+    const id = parseInt(document.getElementById('editGuestId').value);
+    const index = guests.findIndex(g => g.id === id);
+
+    if (index !== -1) {
+        // 1. Perbarui data lokal
+        guests[index].nama = document.getElementById('editNama').value.trim();
+        guests[index].gender = document.getElementById('editGender').value;
+        guests[index].umur = parseInt(document.getElementById('editUmur').value) || 0;
+        guests[index].pendidikan = document.getElementById('editPendidikan').value;
+        guests[index].kontak = document.getElementById('editKontak').value.trim();
+        guests[index].instansi = document.getElementById('editInstansi').value.trim();
+        guests[index].keperluan = document.getElementById('editKeperluan').value;
+        
+        const catatanInput = document.getElementById('editCatatan');
+        guests[index].catatan = catatanInput ? catatanInput.value.trim() : (guests[index].catatan || '-');
+
+        // 2. Simpan ke LocalStorage
+        localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+
+        // 3. Kirim Sinkronisasi Edit ke Google Sheets
+        if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
+            const updatePayload = {
+                action: 'update',
+                ...guests[index]
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatePayload)
+            }).catch(err => console.error("Gagal memperbarui data di Google Sheets:", err));
+        }
+
+        renderData();
+        closeEditModal();
+        alert('Data tamu berhasil diperbarui!');
+    }
+}
+// Fungsi Penghapusan Data (Delete)
+function deleteGuest(id) {
+    if (confirm('Apakah Anda yakin ingin menghapus catatan tamu ini?')) {
+        // 1. Hapus dari array lokal dan LocalStorage
+        guests = guests.filter(g => g.id !== id);
+        localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+
+        // 2. Kirim Sinkronisasi Hapus ke Google Sheets
+        if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
+            const deletePayload = {
+                action: 'delete',
+                id: id
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(deletePayload)
+            }).catch(err => console.error("Gagal menghapus data di Google Sheets:", err));
+        }
+
+        renderData();
+    }
+}
+</script>
+
+<!-- Modal Edit Data Tamu -->
+<div id="editModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <i data-lucide="edit-3" class="w-5 h-5 text-indigo-600"></i> Edit Data Tamu
+            </h3>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <form id="editGuestForm" onsubmit="saveEdit(event)" class="space-y-4">
+            <input type="hidden" id="editGuestId">
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Nama Lengkap</label>
+                <input type="text" id="editNama" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Kelamin</label>
+                    <select id="editGender" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Usia (Tahun)</label>
+                    <input type="number" id="editUmur" required min="1" max="120" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pendidikan</label>
+                    <select id="editPendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                        <option value="">-- Pilih Pendidikan --</option>
+                                <option value="SD / Sederajat">SD / Sederajat</option>
+                                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
+                                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
+                                <option value="D4 / S1">D4 / S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">No. Kontak / HP</label>
+                    <input type="text" id="editKontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
+                <input type="text" id="editInstansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Keperluan Kunjungan</label>
+                <select id="editKeperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                    <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi & Pengaduan (ULP)</option>
+                    <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
+                    <option value="Pengujian / Sampel">Pengujian / Sampel</option>
+                    <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
+                    <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Catatan Tambahan</label>
+                <textarea id="editCatatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-3 border-t">
+                <button type="button" onclick="closeEditModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">Simpan Perubahan</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
