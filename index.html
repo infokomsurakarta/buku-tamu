@@ -329,34 +329,69 @@
         }, 1000);
     }
 
-    // Fungsi Pengatur Tampilan Berdasarkan Status Admin
-    function updateAdminView() {
-        const adminOnlySection = document.getElementById('adminOnlySection');
-        const adminBadge = document.getElementById('adminBadge');
-        const adminBtnText = document.getElementById('adminBtnText');
-        const adminAuthBtn = document.getElementById('adminAuthBtn');
+// Fungsi Pengatur Tampilan Berdasarkan Status Admin
+function updateAdminView() {
+    const adminOnlySection = document.getElementById('adminOnlySection');
+    const adminBadge = document.getElementById('adminBadge');
+    const adminBtnText = document.getElementById('adminBtnText');
+    const adminAuthBtn = document.getElementById('adminAuthBtn');
 
-        if (isAdminLoggedIn) {
-            if (adminOnlySection) adminOnlySection.classList.remove('hidden');
-            if (adminBadge) adminBadge.classList.remove('hidden');
-            if (adminBtnText) adminBtnText.innerText = "Logout Admin";
-            if (adminAuthBtn) {
-                adminAuthBtn.classList.replace('bg-indigo-600', 'bg-rose-600');
-                adminAuthBtn.classList.replace('hover:bg-indigo-700', 'hover:bg-rose-700');
-            }
-            renderData(); 
-        } else {
-            if (adminOnlySection) adminOnlySection.classList.add('hidden');
-            if (adminBadge) adminBadge.classList.add('hidden');
-            if (adminBtnText) adminBtnText.innerText = "Login Admin";
-            if (adminAuthBtn) {
-                adminAuthBtn.classList.replace('bg-rose-600', 'bg-indigo-600');
-                adminAuthBtn.classList.replace('hover:bg-rose-700', 'hover:bg-indigo-700');
-            }
-            const tbody = document.getElementById('guestTableBody');
-            if (tbody) tbody.innerHTML = '';
+    if (isAdminLoggedIn) {
+        if (adminOnlySection) adminOnlySection.classList.remove('hidden');
+        if (adminBadge) adminBadge.classList.remove('hidden');
+        if (adminBtnText) adminBtnText.innerText = "Logout Admin";
+        if (adminAuthBtn) {
+            adminAuthBtn.classList.replace('bg-indigo-600', 'bg-rose-600');
+            adminAuthBtn.classList.replace('hover:bg-indigo-700', 'hover:bg-rose-700');
         }
+
+        // --- PEMUTAKHIRAN: Ambil data dari Google Sheets saat Admin Aktif ---
+        fetchDataFromSheets(); 
+
+    } else {
+        if (adminOnlySection) adminOnlySection.classList.add('hidden');
+        if (adminBadge) adminBadge.classList.add('hidden');
+        if (adminBtnText) adminBtnText.innerText = "Login Admin";
+        if (adminAuthBtn) {
+            adminAuthBtn.classList.replace('bg-rose-600', 'bg-indigo-600');
+            adminAuthBtn.classList.replace('hover:bg-rose-700', 'hover:bg-indigo-700');
+        }
+        
+        // Bersihkan tabel saat Logout
+        const tbody = document.getElementById('guestTableBody');
+        if (tbody) tbody.innerHTML = '';
     }
+}
+
+// Fungsi Mengambil Data dari Google Sheets (GET)
+function fetchDataFromSheets() {
+    // Jika SCRIPT_URL belum diset, gunakan data lokal saja
+    if (typeof SCRIPT_URL === 'undefined' || !SCRIPT_URL) {
+        renderData();
+        return;
+    }
+
+    const tbody = document.getElementById('guestTableBody');
+    if (tbody) {
+        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Memuat riwayat dari Google Sheets...</td></tr>';
+    }
+
+    fetch(SCRIPT_URL)
+        .then(response => response.json())
+        .then(res => {
+            if (res.result === 'success' && Array.isArray(res.data)) {
+                // Perbarui variabel guests global & simpan ke LocalStorage sebagai backup
+                guests = res.data;
+                localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+            }
+            renderData(); // Tampilkan data ke tabel setelah sukses diambil
+        })
+        .catch(err => {
+            console.error("Gagal menarik data dari Google Sheets:", err);
+            // Jika koneksi gagal, gunakan data dari LocalStorage
+            renderData();
+        });
+}
 
     // System Login Modal Admin
     function toggleAdminAuth() {
