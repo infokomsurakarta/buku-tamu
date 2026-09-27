@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -148,75 +149,119 @@
                     <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
                         <i data-lucide="user-plus" class="w-5 h-5 text-emerald-600"></i> Form Kedatangan Tamu
                     </h2>
-                    <form id="guestForm" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Lengkap *</label>
-                            <input type="text" id="nama" name="nama" autocomplete="off" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: Dewi Sri">
-                        </div>
+<form id="guestForm" class="space-y-4">
+    <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Lengkap *</label>
+        <input type="text" id="nama" name="nama" autocomplete="off" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: Dewi Sri">
+    </div>
 
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jenis Kelamin *</label>
-                                <div class="flex items-center gap-3 mt-1.5">
-                                    <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
-                                        <input type="radio" name="gender" value="Laki-laki" required class="text-emerald-600 focus:ring-emerald-500">
-                                        <span class="ml-1">L</span>
-                                    </label>
-                                    <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
-                                        <input type="radio" name="gender" value="Perempuan" required class="text-emerald-600 focus:ring-emerald-500">
-                                        <span class="ml-1">P</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Umur (Thn) *</label>
-                                <input type="number" id="umur" min="1" max="120" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: 30">
-                            </div>
-                        </div>
+    <div class="grid grid-cols-2 gap-3">
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jenis Kelamin *</label>
+            <div class="flex items-center gap-3 mt-1.5">
+                <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
+                    <input type="radio" name="gender" value="Laki-laki" required class="text-emerald-600 focus:ring-emerald-500">
+                    <span class="ml-1">L</span>
+                </label>
+                <label class="inline-flex items-center text-sm text-slate-700 cursor-pointer">
+                    <input type="radio" name="gender" value="Perempuan" required class="text-emerald-600 focus:ring-emerald-500">
+                    <span class="ml-1">P</span>
+                </label>
+            </div>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Umur (Thn) *</label>
+            <input type="number" id="umur" min="1" max="120" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: 30">
+        </div>
+    </div>
 
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pendidikan Terakhir *</label>
-                            <select id="pendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
-                                <option value="">-- Pilih Pendidikan --</option>
-                                <option value="SD / Sederajat">SD / Sederajat</option>
-                                <option value="SMP / Sederajat">SMP / Sederajat</option>
-                                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
-                                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
-                                <option value="D4 / S1">D4 / S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                            </select>
-                        </div>
+    <div class="grid grid-cols-2 gap-3">
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pendidikan Terakhir *</label>
+            <select id="pendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+                <option value="">-- Pilih --</option>
+                <option value="SD / Sederajat">SD / Sederajat</option>
+                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
+                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
+                <option value="D4 / S1">D4 / S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pekerjaan *</label>
+            <select id="pekerjaan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+                <option value="">-- Pilih Pekerjaan --</option>
+                <option value="PNS / TNI / Polri">PNS / TNI / Polri</option>
+                <option value="Pegawai Swasta">Pegawai Swasta</option>
+                <option value="Wiraswasta / Pelaku Usaha">Wiraswasta / Pelaku Usaha</option>
+                <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                <option value="Tenaga Kesehatan / Apoteker">Tenaga Kesehatan / Apoteker</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+        </div>
+    </div>
 
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp / Email *</label>
-                            <input type="text" id="kontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="081234567890 / email@domain.com">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan / Alamat *</label>
-                            <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT XYZ / Umum">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Keperluan Kunjungan *</label>
-                            <select id="keperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
-                                <option value="">-- Pilih Jenis Keperluan --</option>
-                                <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi & Pengaduan (ULP)</option>
-                                <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
-                                <option value="Pengujian / Sampel">Pengujian / Sampel</option>
-                                <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
-                                <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
-                                <option value="Lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Detail Keperluan / Ditemui</label>
-                            <textarea id="catatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Bertemu dengan tim substansi..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow-md">
-                            <i data-lucide="send" class="w-4 h-4"></i> Simpan Registrasi Tamu
-                        </button>
-                    </form>
-                </div>
+    <div class="grid grid-cols-2 gap-3">
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp *</label>
+            <input type="tel" id="kontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="081234567890">
+        </div>
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Email *</label>
+            <input type="email" id="email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="nama@email.com">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan *</label>
+            <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT XYZ">
+        </div>
+        <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jabatan</label>
+            <input type="text" id="jabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Staf / Manager / Pemilik">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jenis Komoditas (Pelaku Usaha)</label>
+        <select id="komoditas" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+            <option value="">-- Bukan Pelaku Usaha / Non-Komoditas --</option>
+            <option value="Obat">Obat</option>
+            <option value="Obat Bahan Alam / Jamu">Obat Bahan Alam / Jamu</option>
+            <option value="Suplemen Kesehatan">Suplemen Kesehatan</option>
+            <option value="Kosmetik">Kosmetik</option>
+            <option value="Pangan Olahan">Pangan Olahan</option>
+            <option value="Kuasi / SK">Kuasi / SK</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Keperluan Kunjungan *</label>
+        <select id="keperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
+            <option value="">-- Pilih Jenis Keperluan --</option>
+            <option value="Layanan Informasi">Layanan Informasi</option>
+            <option value="Layanan Pengaduan">Layanan Pengaduan</option>
+            <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
+            <option value="Pengujian / Sampel">Pengujian / Sampel</option>
+            <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
+            <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Detail Keperluan / Ditemui</label>
+        <textarea id="catatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Bertemu dengan tim substansi..."></textarea>
+    </div>
+
+    <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow-md">
+        <i data-lucide="send" class="w-4 h-4"></i> Simpan Registrasi Tamu
+    </button>
+</form>
+            </div>
             </div>
 
             <!-- Tabel Data Tamu -->
@@ -232,7 +277,8 @@
                             <input type="text" id="searchInput" oninput="renderData()" placeholder="Cari nama / instansi..." class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                             <select id="filterKeperluan" onchange="renderData()" class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
                                 <option value="">Semua Keperluan</option>
-                                <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi (ULP)</option>
+                                <option value="Layanan Informasi">Layanan Informasi</option>
+				<option value="Layanan Pengaduan">Layanan Pengaduan</option>
                                 <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
                                 <option value="Pengujian / Sampel">Pengujian / Sampel</option>
                                 <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
@@ -292,44 +338,183 @@
             </form>
         </div>
     </div>
+<!-- Modal Edit Data Tamu -->
+<div id="editModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <i data-lucide="edit-3" class="w-5 h-5 text-indigo-600"></i> Edit Data Tamu
+            </h3>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+<form id="editGuestForm" onsubmit="saveEdit(event)" class="space-y-4">
+    <input type="hidden" id="editGuestId">
+
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Nama Lengkap</label>
+        <input type="text" id="editNama" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Kelamin</label>
+            <select id="editGender" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Usia (Tahun)</label>
+            <input type="number" id="editUmur" required min="1" max="120" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pendidikan</label>
+            <select id="editPendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                <option value="">-- Pilih Pendidikan --</option>
+                <option value="SD / Sederajat">SD / Sederajat</option>
+                <option value="SMP / Sederajat">SMP / Sederajat</option>
+                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
+                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
+                <option value="D4 / S1">D4 / S1</option>
+                <option value="S2">S2</option>
+                <option value="S3">S3</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pekerjaan</label>
+            <select id="editPekerjaan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                <option value="PNS / TNI / Polri">PNS / TNI / Polri</option>
+                <option value="Pegawai Swasta">Pegawai Swasta</option>
+                <option value="Wiraswasta / Pelaku Usaha">Wiraswasta / Pelaku Usaha</option>
+                <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                <option value="Tenaga Kesehatan / Apoteker">Tenaga Kesehatan / Apoteker</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">No. WhatsApp</label>
+            <input type="tel" id="editKontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Email</label>
+            <input type="email" id="editEmail" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
+            <input type="text" id="editInstansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jabatan</label>
+            <input type="text" id="editJabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Komoditas (Pelaku Usaha)</label>
+        <select id="editKomoditas" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+            <option value="">-- Bukan Pelaku Usaha / Non-Komoditas --</option>
+            <option value="Obat">Obat</option>
+            <option value="Obat Bahan Alam / Jamu">Obat Bahan Alam / Jamu</option>
+            <option value="Suplemen Kesehatan">Suplemen Kesehatan</option>
+            <option value="Kosmetik">Kosmetik</option>
+            <option value="Pangan Olahan">Pangan Olahan</option>
+            <option value="Kuasi / SK">Kuasi / SK</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Keperluan Kunjungan</label>
+        <select id="editKeperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+            <option value="Layanan Informasi">Layanan Informasi</option>
+            <option value="Layanan Pengaduan">Layanan Pengaduan</option>
+            <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
+            <option value="Pengujian / Sampel">Pengujian / Sampel</option>
+            <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
+            <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Catatan Tambahan</label>
+        <textarea id="editCatatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+    </div>
+
+    <div class="flex justify-end gap-3 pt-3 border-t">
+        <button type="button" onclick="closeEditModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">Simpan Perubahan</button>
+    </div>
+</form>
+    </div>
+</div>
+
 
     <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-200 mt-12 bg-white no-print">
         &copy; Balai Pengawas Obat dan Makanan di Surakarta. All rights reserved.
     </footer>
 
     <script>
-    // Konfigurasi Admin
-    // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
-        
-    const ADMIN_PIN = "5010474"; // PIN Admin
+// Konfigurasi Admin
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
+const ADMIN_PIN = "5010474"; // Disarankan menggunakan enkripsi/hashing untuk penggunaan produksi
 
-    let isAdminLoggedIn = false;
-    let pendingAdminAction = null; // Callback aksi setelah login berhasil
+let isAdminLoggedIn = false;
+let pendingAdminAction = null;
 
-    // Inisialisasi Data
-    let guests = JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
-    let chartGenderInstance = null;
-    let chartEduInstance = null;
-    let chartAgeInstance = null;
+// Inisialisasi Data
+let guests = JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
+let chartGenderInstance = null;
+let chartEduInstance = null;
+let chartAgeInstance = null;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        initCharts();
-        updateAdminView(); // Atur tampilan awal berdasarkan status login Admin
-        if (window.lucide) lucide.createIcons();
-        startLiveClock();
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    initCharts();
+    updateAdminView();
+    if (window.lucide) lucide.createIcons();
+    startLiveClock();
+    setupKomoditasToggle();
+});
 
-    function startLiveClock() {
-        const clockEl = document.getElementById('liveClock');
-        if (!clockEl) return;
-        setInterval(() => {
-            const now = new Date();
-            clockEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ' - ' + now.toLocaleTimeString('id-ID') + ' WIB';
-        }, 1000);
-    }
+function startLiveClock() {
+    const clockEl = document.getElementById('liveClock');
+    if (!clockEl) return;
+    setInterval(() => {
+        const now = new Date();
+        clockEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ' - ' + now.toLocaleTimeString('id-ID') + ' WIB';
+    }, 1000);
+}
 
-// Fungsi Pengatur Tampilan Berdasarkan Status Admin
+function setupKomoditasToggle() {
+    const setupToggle = (selectId, inputContainerId) => {
+        const selectEl = document.getElementById(selectId);
+        const containerEl = document.getElementById(inputContainerId);
+        if (selectEl && containerEl) {
+            selectEl.addEventListener('change', () => {
+                if (selectEl.value === 'Yang lain') {
+                    containerEl.classList.remove('hidden');
+                } else {
+                    containerEl.classList.add('hidden');
+                }
+            });
+        }
+    };
+
+    setupToggle('komoditas', 'komoditasLainnyaWrapper');
+    setupToggle('editKomoditas', 'editKomoditasLainnyaWrapper');
+}
+
 function updateAdminView() {
     const adminOnlySection = document.getElementById('adminOnlySection');
     const adminBadge = document.getElementById('adminBadge');
@@ -345,9 +530,7 @@ function updateAdminView() {
             adminAuthBtn.classList.replace('hover:bg-indigo-700', 'hover:bg-rose-700');
         }
 
-        // --- PEMUTAKHIRAN: Ambil data dari Google Sheets saat Admin Aktif ---
         fetchDataFromSheets(); 
-
     } else {
         if (adminOnlySection) adminOnlySection.classList.add('hidden');
         if (adminBadge) adminBadge.classList.add('hidden');
@@ -357,15 +540,12 @@ function updateAdminView() {
             adminAuthBtn.classList.replace('hover:bg-rose-700', 'hover:bg-indigo-700');
         }
         
-        // Bersihkan tabel saat Logout
         const tbody = document.getElementById('guestTableBody');
         if (tbody) tbody.innerHTML = '';
     }
 }
 
-// Fungsi Mengambil Data dari Google Sheets (GET)
 function fetchDataFromSheets() {
-    // Jika SCRIPT_URL belum diset, gunakan data lokal saja
     if (typeof SCRIPT_URL === 'undefined' || !SCRIPT_URL) {
         renderData();
         return;
@@ -373,391 +553,397 @@ function fetchDataFromSheets() {
 
     const tbody = document.getElementById('guestTableBody');
     if (tbody) {
-        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Memuat riwayat dari Google Sheets...</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Memuat data dari server...</td></tr>';
     }
 
     fetch(SCRIPT_URL)
         .then(response => response.json())
         .then(res => {
             if (res.result === 'success' && Array.isArray(res.data)) {
-                // Perbarui variabel guests global & simpan ke LocalStorage sebagai backup
                 guests = res.data;
                 localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
             }
-            renderData(); // Tampilkan data ke tabel setelah sukses diambil
+            renderData();
         })
         .catch(err => {
             console.error("Gagal menarik data dari Google Sheets:", err);
-            // Jika koneksi gagal, gunakan data dari LocalStorage
             renderData();
         });
 }
 
-    // System Login Modal Admin
-    function toggleAdminAuth() {
-        if (isAdminLoggedIn) {
-            isAdminLoggedIn = false;
-            updateAdminView();
-            alert("Anda telah keluar dari Mode Admin. Riwayat kunjungan disembunyikan.");
-        } else {
-            openLoginModal();
+function toggleAdminAuth() {
+    if (isAdminLoggedIn) {
+        isAdminLoggedIn = false;
+        updateAdminView();
+        alert("Mode Admin ditutup.");
+    } else {
+        openLoginModal();
+    }
+}
+
+function openLoginModal(actionCallback = null) {
+    pendingAdminAction = actionCallback;
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.getElementById('pinInput').value = '';
+        document.getElementById('loginError').classList.add('hidden');
+        document.getElementById('pinInput').focus();
+    }
+}
+
+function closeLoginModal() {
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.classList.add('hidden');
+    pendingAdminAction = null;
+}
+
+function handleLoginSubmit(e) {
+    e.preventDefault();
+    const inputPin = document.getElementById('pinInput').value;
+    if (inputPin === ADMIN_PIN) {
+        isAdminLoggedIn = true;
+        closeLoginModal();
+        updateAdminView();
+        if (pendingAdminAction) {
+            pendingAdminAction();
+            pendingAdminAction = null;
         }
+    } else {
+        document.getElementById('loginError').classList.remove('hidden');
+    }
+}
+
+document.getElementById('guestForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const genderSelected = document.querySelector('input[name="gender"]:checked');
+    
+    const komoditasSelect = document.getElementById('komoditas').value;
+    const komoditasLain = document.getElementById('komoditasLainnya')?.value.trim();
+    const finalKomoditas = (komoditasSelect === 'Yang lain' && komoditasLain) ? komoditasLain : komoditasSelect;
+
+    const newGuest = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        nama: document.getElementById('nama').value.trim(),
+        gender: genderSelected ? genderSelected.value : '-',
+        umur: parseInt(document.getElementById('umur').value) || 0,
+        pendidikan: document.getElementById('pendidikan').value,
+        pekerjaan: document.getElementById('pekerjaan').value,
+        jabatan: document.getElementById('jabatan').value,
+        email: document.getElementById('email').value.trim() || '-',
+        kontak: document.getElementById('kontak').value.trim() || '-',
+        instansi: document.getElementById('instansi').value.trim() || '-',
+        komoditas: finalKomoditas || '-',
+        keperluan: document.getElementById('keperluan').value,
+        catatan: document.getElementById('catatan').value.trim() || '-'
+    };
+
+    guests.unshift(newGuest);
+    localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+
+    if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newGuest)
+        }).catch(err => console.error("Error kirim data:", err));
     }
 
-    function openLoginModal(actionCallback = null) {
-        pendingAdminAction = actionCallback;
-        const modal = document.getElementById('loginModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            document.getElementById('pinInput').value = '';
-            document.getElementById('loginError').classList.add('hidden');
-            document.getElementById('pinInput').focus();
-        }
+    document.getElementById('guestForm').reset();
+    document.getElementById('komoditasLainnyaWrapper')?.classList.add('hidden');
+    alert('Terima kasih! Data kunjungan Anda berhasil disimpan.');
+
+    if (isAdminLoggedIn) {
+        renderData();
+    }
+});
+
+function initCharts() {
+    const ctxGender = document.getElementById('genderChart')?.getContext('2d');
+    if (ctxGender) {
+        chartGenderInstance = new Chart(ctxGender, {
+            type: 'doughnut',
+            data: { labels: ['Laki-laki', 'Perempuan'], datasets: [{ data: [0, 0], backgroundColor: ['#3b82f6', '#ec4899'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
     }
 
-    function closeLoginModal() {
-        const modal = document.getElementById('loginModal');
-        if (modal) modal.classList.add('hidden');
-        pendingAdminAction = null;
+    const ctxEdu = document.getElementById('eduChart')?.getContext('2d');
+    if (ctxEdu) {
+        chartEduInstance = new Chart(ctxEdu, {
+            type: 'bar',
+            data: { labels: ['SD/SMP', 'SMA', 'D1-D3', 'D4/S1', 'S2/S3'], datasets: [{ label: 'Jumlah', data: [0, 0, 0, 0, 0], backgroundColor: '#10b981' }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+        });
     }
 
-    function handleLoginSubmit(e) {
-        e.preventDefault();
-        const inputPin = document.getElementById('pinInput').value;
-        if (inputPin === ADMIN_PIN) {
-            isAdminLoggedIn = true;
-            closeLoginModal();
-            updateAdminView();
-            if (pendingAdminAction) {
-                pendingAdminAction();
-                pendingAdminAction = null;
-            }
-        } else {
-            document.getElementById('loginError').classList.remove('hidden');
-        }
+    const ctxAge = document.getElementById('ageChart')?.getContext('2d');
+    if (ctxAge) {
+        chartAgeInstance = new Chart(ctxAge, {
+            type: 'pie',
+            data: { labels: ['< 20 th', '20-39 th', '40-59 th', '≥ 60 th'], datasets: [{ data: [0, 0, 0, 0], backgroundColor: ['#f59e0b', '#6366f1', '#14b8a6', '#64748b'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
     }
+}
 
-    function handleExportClick() {
-        if (isAdminLoggedIn) {
-            exportToCSV();
-        } else {
-            openLoginModal(() => exportToCSV());
-        }
-    }
+function updateCharts() {
+    if (!chartGenderInstance || !chartEduInstance || !chartAgeInstance) return;
 
-    function handleDeleteClick(id) {
-        if (isAdminLoggedIn) {
-            deleteGuest(id);
-        } else {
-            openLoginModal(() => deleteGuest(id));
-        }
-    }
+    const male = guests.filter(g => g.gender === 'Laki-laki').length;
+    const female = guests.filter(g => g.gender === 'Perempuan').length;
+    chartGenderInstance.data.datasets[0].data = [male, female];
+    chartGenderInstance.update();
 
-    // Form Submit dengan Pengiriman Otomatis ke Google Sheets
-    document.getElementById('guestForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const genderSelected = document.querySelector('input[name="gender"]:checked');
+    const eduCounts = { 'SD/SMP': 0, 'SMA': 0, 'D1-D3': 0, 'D4/S1': 0, 'S2/S3': 0 };
+    guests.forEach(g => {
+        if (g.pendidikan === 'SD / Sederajat' || g.pendidikan === 'SMP / Sederajat') eduCounts['SD/SMP']++;
+        else if (g.pendidikan === 'SMA / SMK / Sederajat') eduCounts['SMA']++;
+        else if (g.pendidikan === 'D1 / D2 / D3') eduCounts['D1-D3']++;
+        else if (g.pendidikan === 'D4 / S1') eduCounts['D4/S1']++;
+        else if (g.pendidikan === 'S2' || g.pendidikan === 'S3') eduCounts['S2/S3']++;
+    });
+    chartEduInstance.data.datasets[0].data = Object.values(eduCounts);
+    chartEduInstance.update();
 
-        const newGuest = {
-            id: Date.now(),
-            timestamp: new Date().toISOString(),
-            nama: document.getElementById('nama').value.trim(),
-            gender: genderSelected ? genderSelected.value : '-',
-            umur: parseInt(document.getElementById('umur').value) || 0,
-            pendidikan: document.getElementById('pendidikan').value,
-            kontak: document.getElementById('kontak').value.trim() || '-',
-            instansi: document.getElementById('instansi').value.trim() || '-',
-            keperluan: document.getElementById('keperluan').value,
-            catatan: document.getElementById('catatan').value.trim() || '-'
-        };
+    let ageGroup = [0, 0, 0, 0];
+    guests.forEach(g => {
+        const u = parseInt(g.umur) || 0;
+        if (u > 0 && u < 20) ageGroup[0]++;
+        else if (u >= 20 && u <= 39) ageGroup[1]++;
+        else if (u >= 40 && u <= 59) ageGroup[2]++;
+        else if (u >= 60) ageGroup[3]++;
+    });
+    chartAgeInstance.data.datasets[0].data = ageGroup;
+    chartAgeInstance.update();
+}
 
-        // 1. Simpan ke LocalStorage
-        guests.unshift(newGuest);
-        localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
+function renderData() {
+    if (!isAdminLoggedIn) return;
 
-        // 2. Kirim Otomatis ke Google Sheets via Apps Script
-        if (SCRIPT_URL && SCRIPT_URL !== '') {
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newGuest)
-            }).catch(err => console.error("Gagal mengirim data ke Google Sheets:", err));
-        }
+    const tbody = document.getElementById('guestTableBody');
+    const emptyState = document.getElementById('emptyState');
+    const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const filter = document.getElementById('filterKeperluan')?.value || '';
 
-        document.getElementById('guestForm').reset();
-        alert('Terima kasih! Data kunjungan Anda berhasil disimpan.');
+    if (!tbody) return;
 
-        if (isAdminLoggedIn) {
-            renderData();
-        }
+    const filteredGuests = guests.filter(g => {
+        const matchSearch = (g.nama || '').toLowerCase().includes(search) || 
+                            (g.instansi || '').toLowerCase().includes(search) ||
+                            (g.email || '').toLowerCase().includes(search);
+        const matchFilter = filter === '' || g.keperluan === filter;
+        return matchSearch && matchFilter;
     });
 
-    function initCharts() {
-        const ctxGender = document.getElementById('genderChart')?.getContext('2d');
-        if (ctxGender) {
-            chartGenderInstance = new Chart(ctxGender, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Laki-laki', 'Perempuan'],
-                    datasets: [{ data: [0, 0], backgroundColor: ['#3b82f6', '#ec4899'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-            });
-        }
-
-        const ctxEdu = document.getElementById('eduChart')?.getContext('2d');
-        if (ctxEdu) {
-            chartEduInstance = new Chart(ctxEdu, {
-                type: 'bar',
-                data: {
-                    labels: ['SD/SMP', 'SMA', 'D1-D3', 'D4/S1', 'S2/S3'],
-                    datasets: [{ label: 'Jumlah', data: [0, 0, 0, 0, 0], backgroundColor: '#10b981' }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
-            });
-        }
-
-        const ctxAge = document.getElementById('ageChart')?.getContext('2d');
-        if (ctxAge) {
-            chartAgeInstance = new Chart(ctxAge, {
-                type: 'pie',
-                data: {
-                    labels: ['< 20 th', '20-39 th', '40-59 th', '≥ 60 th'],
-                    datasets: [{ data: [0, 0, 0, 0], backgroundColor: ['#f59e0b', '#6366f1', '#14b8a6', '#64748b'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-            });
-        }
-    }
-
-    function updateCharts() {
-        if (!chartGenderInstance || !chartEduInstance || !chartAgeInstance) return;
-
-        const male = guests.filter(g => g.gender === 'Laki-laki').length;
-        const female = guests.filter(g => g.gender === 'Perempuan').length;
-        chartGenderInstance.data.datasets[0].data = [male, female];
-        chartGenderInstance.update();
-
-        const eduCounts = { 'SD/SMP': 0, 'SMA': 0, 'D1-D3': 0, 'D4/S1': 0, 'S2/S3': 0 };
-        guests.forEach(g => {
-            if (g.pendidikan === 'SD / Sederajat' || g.pendidikan === 'SMP / Sederajat') eduCounts['SD/SMP']++;
-            else if (g.pendidikan === 'SMA / SMK / Sederajat') eduCounts['SMA']++;
-            else if (g.pendidikan === 'D1 / D2 / D3') eduCounts['D1-D3']++;
-            else if (g.pendidikan === 'D4 / S1') eduCounts['D4/S1']++;
-            else if (g.pendidikan === 'S2' || g.pendidikan === 'S3') eduCounts['S2/S3']++;
-        });
-        chartEduInstance.data.datasets[0].data = Object.values(eduCounts);
-        chartEduInstance.update();
-
-        let ageGroup = [0, 0, 0, 0];
-        guests.forEach(g => {
-            const u = parseInt(g.umur) || 0;
-            if (u > 0 && u < 20) ageGroup[0]++;
-            else if (u >= 20 && u <= 39) ageGroup[1]++;
-            else if (u >= 40 && u <= 59) ageGroup[2]++;
-            else if (u >= 60) ageGroup[3]++;
-        });
-        chartAgeInstance.data.datasets[0].data = ageGroup;
-        chartAgeInstance.update();
-    }
-
-    function renderData() {
-        if (!isAdminLoggedIn) return;
-
-        const tbody = document.getElementById('guestTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
-        const filter = document.getElementById('filterKeperluan')?.value || '';
-
-        if (!tbody) return;
-
-        const filteredGuests = guests.filter(g => {
-            const matchSearch = (g.nama || '').toLowerCase().includes(search) || (g.instansi || '').toLowerCase().includes(search);
-            const matchFilter = filter === '' || g.keperluan === filter;
-            return matchSearch && matchFilter;
-        });
-
-        tbody.innerHTML = '';
-        if (filteredGuests.length === 0) {
-            if (emptyState) emptyState.classList.remove('hidden');
-        } else {
-            if (emptyState) emptyState.classList.add('hidden');
-            filteredGuests.forEach(g => {
-                const dateObj = new Date(g.timestamp);
-                const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-                const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-
-                const genderBadge = g.gender === 'Laki-laki' 
-                    ? '<span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">L</span>' 
-                    : (g.gender === 'Perempuan' ? '<span class="text-pink-600 bg-pink-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">P</span>' : '');
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50 transition';
-                tr.innerHTML = `
-                    <td class="p-3 text-slate-500 text-xs">
-                        <span class="font-semibold text-slate-700 block">${formattedDate}</span>
-                        ${formattedTime} WIB
-                    </td>
-                    <td class="p-3">
-                        <div class="font-bold text-slate-800 flex items-center gap-1.5">
-                            ${escapeHtml(g.nama)} ${genderBadge}
-                        </div>
-                        <div class="text-xs text-slate-500">${g.umur ? g.umur + ' thn' : '-'} • ${escapeHtml(g.pendidikan || '-')}</div>
-                        <div class="text-xs text-slate-400 mt-0.5">${escapeHtml(g.kontak || '-')}</div>
-                    </td>
-                    <td class="p-3 text-slate-700 font-medium">${escapeHtml(g.instansi || '-')}</td>
-                    <td class="p-3">
-                        <span class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                            ${escapeHtml(g.keperluan)}
-                        </span>
-                        ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
-                    </td>
-                    <td class="p-3 text-center no-print">
-                        <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
-                            <i data-lucide="edit-2" class="w-4 h-4"></i>
-                        </button>
-                        <button onclick="handleDeleteClick(${g.id})" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data (Butuh PIN Admin)">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        if (window.lucide) lucide.createIcons();
-        updateStats();
-        updateCharts();
-    }
-
-    function deleteGuest(id) {
-        if (confirm('Apakah Anda yakin ingin menghapus catatan tamu ini?')) {
-            guests = guests.filter(g => g.id !== id);
-            localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
-            renderData();
-        }
-    }
-
-    function updateStats() {
-        const totalEl = document.getElementById('statTotal');
-        const todayEl = document.getElementById('statToday');
-        const instansiEl = document.getElementById('statInstansi');
-
-        if (totalEl) totalEl.innerText = guests.length;
-
-        const todayStr = new Date().toDateString();
-        const todayCount = guests.filter(g => new Date(g.timestamp).toDateString() === todayStr).length;
-        if (todayEl) todayEl.innerText = todayCount;
-
-        const uniqueInstansi = new Set(guests.map(g => (g.instansi || '').toLowerCase().trim())).size;
-        if (instansiEl) instansiEl.innerText = uniqueInstansi;
-    }
-
-    function cleanCSVField(val) {
-        if (val === null || val === undefined) return '""';
-        const str = String(val).replace(/"/g, '""').replace(/[\r\n]+/g, ' ');
-        return `"${str}"`;
-    }
-
-    function exportToCSV() {
-        if (guests.length === 0) {
-            alert('Belum ada data kunjungan untuk diekspor!');
-            return;
-        }
-
-        const headers = ['Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur (Tahun)', 'Pendidikan Terakhir', 'Kontak/HP', 'Instansi/Alamat', 'Keperluan Kunjungan', 'Detail/Catatan'];
-        const csvRows = [headers.join(',')];
-
-        guests.forEach(g => {
+    tbody.innerHTML = '';
+    if (filteredGuests.length === 0) {
+        if (emptyState) emptyState.classList.remove('hidden');
+    } else {
+        if (emptyState) emptyState.classList.add('hidden');
+        filteredGuests.forEach(g => {
             const dateObj = new Date(g.timestamp);
             const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
             const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            
-            const waktu = `${formattedDate} ${formattedTime} WIB`;
 
-            const row = [
-                cleanCSVField(waktu),
-                cleanCSVField(g.nama),
-                cleanCSVField(g.gender),
-                cleanCSVField(g.umur),
-                cleanCSVField(g.pendidikan),
-                cleanCSVField(g.kontak),
-                cleanCSVField(g.instansi),
-                cleanCSVField(g.keperluan),
-                cleanCSVField(g.catatan)
-            ];
-            csvRows.push(row.join(','));
+            const genderBadge = g.gender === 'Laki-laki' 
+                ? '<span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">L</span>' 
+                : (g.gender === 'Perempuan' ? '<span class="text-pink-600 bg-pink-50 px-1.5 py-0.5 rounded text-[10px] font-semibold">P</span>' : '');
+
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-50 transition';
+            tr.innerHTML = `
+                <td class="p-3 text-slate-500 text-xs">
+                    <span class="font-semibold text-slate-700 block">${formattedDate}</span>
+                    ${formattedTime} WIB
+                </td>
+                <td class="p-3">
+                    <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                        ${escapeHtml(g.nama)} ${genderBadge}
+                    </div>
+                    <div class="text-xs text-slate-500">${g.umur ? g.umur + ' thn' : '-'} • ${escapeHtml(g.pendidikan || '-')}</div>
+                    <div class="text-xs text-slate-600 mt-0.5"><b>Pekerjaan:</b> ${escapeHtml(g.pekerjaan || '-')} (${escapeHtml(g.jabatan || '-')})</div>
+                    <div class="text-xs text-slate-400 mt-0.5">${escapeHtml(g.kontak || '-')} | ${escapeHtml(g.email || '-')}</div>
+                </td>
+                <td class="p-3 text-slate-700 font-medium text-xs">
+                    <div>${escapeHtml(g.instansi || '-')}</div>
+                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] bg-slate-100 text-slate-600 rounded">
+                        Komoditas: ${escapeHtml(g.komoditas || '-')}
+                    </span>
+                </td>
+                <td class="p-3">
+                    <span class="inline-block px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        ${escapeHtml(g.keperluan)}
+                    </span>
+                    ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
+                </td>
+                <td class="p-3 text-center no-print">
+                    <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
+                        <i data-lucide="edit-2" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="handleDeleteClick(${g.id})" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
         });
-
-        const blob = new Blob(['\ufeff' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `buku_tamu_BPOM_Surakarta_${new Date().toISOString().split('T')[0]}.csv`;
-        a.click();
-        URL.revokeObjectURL(url);
     }
 
-    function escapeHtml(text) {
-        if (text === null || text === undefined) return '';
-        return String(text)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+    if (window.lucide) lucide.createIcons();
+    updateStats();
+    updateCharts();
+}
+
+function updateStats() {
+    const totalEl = document.getElementById('statTotal');
+    const todayEl = document.getElementById('statToday');
+    const instansiEl = document.getElementById('statInstansi');
+
+    if (totalEl) totalEl.innerText = guests.length;
+
+    const todayStr = new Date().toDateString();
+    const todayCount = guests.filter(g => new Date(g.timestamp).toDateString() === todayStr).length;
+    if (todayEl) todayEl.innerText = todayCount;
+
+    const uniqueInstansi = new Set(guests.map(g => (g.instansi || '').toLowerCase().trim())).size;
+    if (instansiEl) instansiEl.innerText = uniqueInstansi;
+}
+
+function cleanCSVField(val) {
+    if (val === null || val === undefined) return '""';
+    const str = String(val).replace(/"/g, '""').replace(/[\r\n]+/g, ' ');
+    return `"${str}"`;
+}
+
+function exportToCSV() {
+    if (guests.length === 0) {
+        alert('Belum ada data kunjungan untuk diekspor!');
+        return;
     }
 
-    function openEditModal(id) {
-        const guest = guests.find(g => g.id === id);
-        if (!guest) return;
+    const headers = ['Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur', 'Pendidikan', 'Pekerjaan', 'Jabatan', 'Email', 'Kontak/HP', 'Instansi/Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'];
+    const csvRows = [headers.join(',')];
 
-        document.getElementById('editGuestId').value = guest.id;
-        document.getElementById('editNama').value = guest.nama || '';
-        document.getElementById('editGender').value = guest.gender || 'Laki-laki';
-        document.getElementById('editUmur').value = guest.umur || '';
-        document.getElementById('editPendidikan').value = guest.pendidikan || 'S1';
-        document.getElementById('editKontak').value = guest.kontak || '';
-        document.getElementById('editInstansi').value = guest.instansi || '';
-        document.getElementById('editKeperluan').value = guest.keperluan || 'Layanan Informasi & Pengaduan (ULP)';
-        document.getElementById('editCatatan').value = guest.catatan || '';
+    guests.forEach(g => {
+        const dateObj = new Date(g.timestamp);
+        const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+        const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        const waktu = `${formattedDate} ${formattedTime} WIB`;
 
-        const modal = document.getElementById('editModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+        const row = [
+            cleanCSVField(waktu),
+            cleanCSVField(g.nama),
+            cleanCSVField(g.gender),
+            cleanCSVField(g.umur),
+            cleanCSVField(g.pendidikan),
+            cleanCSVField(g.pekerjaan),
+            cleanCSVField(g.jabatan),
+            cleanCSVField(g.email),
+            cleanCSVField(g.kontak),
+            cleanCSVField(g.instansi),
+            cleanCSVField(g.komoditas),
+            cleanCSVField(g.keperluan),
+            cleanCSVField(g.catatan)
+        ];
+        csvRows.push(row.join(','));
+    });
+
+    const blob = new Blob(['\ufeff' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `buku_tamu_BPOM_Surakarta_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function openEditModal(id) {
+    const guest = guests.find(g => Number(g.id) === Number(id));
+    if (!guest) return;
+
+    document.getElementById('editGuestId').value = guest.id;
+    document.getElementById('editNama').value = guest.nama || '';
+    document.getElementById('editGender').value = guest.gender || 'Laki-laki';
+    document.getElementById('editUmur').value = guest.umur || '';
+    document.getElementById('editPendidikan').value = guest.pendidikan || 'D4 / S1';
+    document.getElementById('editPekerjaan').value = guest.pekerjaan || 'Pegawai swasta';
+    document.getElementById('editJabatan').value = guest.jabatan || 'Staf';
+    document.getElementById('editEmail').value = guest.email || '';
+    document.getElementById('editKontak').value = guest.kontak || '';
+    document.getElementById('editInstansi').value = guest.instansi || '';
+    
+    // Penanganan opsi komoditas pada modal edit
+    const editKomoditasSelect = document.getElementById('editKomoditas');
+    const editKomoditasWrapper = document.getElementById('editKomoditasLainnyaWrapper');
+    const editKomoditasLainnyaInput = document.getElementById('editKomoditasLainnya');
+    
+    if (editKomoditasSelect) {
+        const options = Array.from(editKomoditasSelect.options).map(o => o.value);
+        if (options.includes(guest.komoditas)) {
+            editKomoditasSelect.value = guest.komoditas;
+            if (editKomoditasWrapper) editKomoditasWrapper.classList.add('hidden');
+        } else {
+            editKomoditasSelect.value = 'Yang lain';
+            if (editKomoditasWrapper) editKomoditasWrapper.classList.remove('hidden');
+            if (editKomoditasLainnyaInput) editKomoditasLainnyaInput.value = guest.komoditas || '';
         }
     }
 
-    function closeEditModal() {
-        const modal = document.getElementById('editModal');
-        if (modal) modal.classList.add('hidden');
-    }
+    document.getElementById('editKeperluan').value = guest.keperluan || 'Layanan Informasi';
+    document.getElementById('editCatatan').value = guest.catatan || '';
 
-    // Fungsi Pemutakhiran Data (Edit)
-    function saveEdit(e) {
+    const modal = document.getElementById('editModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+}
+
+function closeEditModal() {
+    const modal = document.getElementById('editModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function saveEdit(e) {
     e.preventDefault();
     const id = parseInt(document.getElementById('editGuestId').value);
-    const index = guests.findIndex(g => g.id === id);
+    const index = guests.findIndex(g => Number(g.id) === Number(id));
 
     if (index !== -1) {
-        // 1. Perbarui data lokal
+        const komoditasSelect = document.getElementById('editKomoditas').value;
+        const komoditasLain = document.getElementById('editKomoditasLainnya')?.value.trim();
+        const finalKomoditas = (komoditasSelect === 'Yang lain' && komoditasLain) ? komoditasLain : komoditasSelect;
+
         guests[index].nama = document.getElementById('editNama').value.trim();
         guests[index].gender = document.getElementById('editGender').value;
         guests[index].umur = parseInt(document.getElementById('editUmur').value) || 0;
         guests[index].pendidikan = document.getElementById('editPendidikan').value;
+        guests[index].pekerjaan = document.getElementById('editPekerjaan').value;
+        guests[index].jabatan = document.getElementById('editJabatan').value;
+        guests[index].email = document.getElementById('editEmail').value.trim();
         guests[index].kontak = document.getElementById('editKontak').value.trim();
         guests[index].instansi = document.getElementById('editInstansi').value.trim();
+        guests[index].komoditas = finalKomoditas;
         guests[index].keperluan = document.getElementById('editKeperluan').value;
         
         const catatanInput = document.getElementById('editCatatan');
         guests[index].catatan = catatanInput ? catatanInput.value.trim() : (guests[index].catatan || '-');
 
-        // 2. Simpan ke LocalStorage
         localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
 
-        // 3. Kirim Sinkronisasi Edit ke Google Sheets
         if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
             const updatePayload = {
                 action: 'update',
@@ -769,22 +955,20 @@ function fetchDataFromSheets() {
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatePayload)
-            }).catch(err => console.error("Gagal memperbarui data di Google Sheets:", err));
+            }).catch(err => console.error("Gagal update data:", err));
         }
 
         renderData();
         closeEditModal();
-        alert('Data tamu berhasil diperbarui!');
+        alert('Data berhasil diperbarui!');
     }
 }
-// Fungsi Penghapusan Data (Delete)
+
 function deleteGuest(id) {
     if (confirm('Apakah Anda yakin ingin menghapus catatan tamu ini?')) {
-        // 1. Hapus dari array lokal dan LocalStorage
-        guests = guests.filter(g => g.id !== id);
+        guests = guests.filter(g => Number(g.id) !== Number(id));
         localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
 
-        // 2. Kirim Sinkronisasi Hapus ke Google Sheets
         if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
             const deletePayload = {
                 action: 'delete',
@@ -796,7 +980,7 @@ function deleteGuest(id) {
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(deletePayload)
-            }).catch(err => console.error("Gagal menghapus data di Google Sheets:", err));
+            }).catch(err => console.error("Gagal hapus data:", err));
         }
 
         renderData();
@@ -804,88 +988,5 @@ function deleteGuest(id) {
 }
 </script>
 
-<!-- Modal Edit Data Tamu -->
-<div id="editModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
-        <div class="flex justify-between items-center border-b pb-3 mb-4">
-            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <i data-lucide="edit-3" class="w-5 h-5 text-indigo-600"></i> Edit Data Tamu
-            </h3>
-            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <form id="editGuestForm" onsubmit="saveEdit(event)" class="space-y-4">
-            <input type="hidden" id="editGuestId">
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Nama Lengkap</label>
-                <input type="text" id="editNama" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Kelamin</label>
-                    <select id="editGender" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Usia (Tahun)</label>
-                    <input type="number" id="editUmur" required min="1" max="120" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pendidikan</label>
-                    <select id="editPendidikan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
-                        <option value="">-- Pilih Pendidikan --</option>
-                                <option value="SD / Sederajat">SD / Sederajat</option>
-                                <option value="SMP / Sederajat">SMP / Sederajat</option>
-                                <option value="SMA / SMK / Sederajat">SMA / SMK / Sederajat</option>
-                                <option value="D1 / D2 / D3">D1 / D2 / D3</option>
-                                <option value="D4 / S1">D4 / S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">No. Kontak / HP</label>
-                    <input type="text" id="editKontak" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
-                <input type="text" id="editInstansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Keperluan Kunjungan</label>
-                <select id="editKeperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
-                    <option value="Layanan Informasi & Pengaduan (ULP)">Layanan Informasi & Pengaduan (ULP)</option>
-                    <option value="Koordinasi / Audiensi">Koordinasi / Audiensi</option>
-                    <option value="Pengujian / Sampel">Pengujian / Sampel</option>
-                    <option value="Pengiriman Surat / Kurir">Pengiriman Surat / Kurir</option>
-                    <option value="Kunjungan Kerja / Magang">Kunjungan Kerja / Magang</option>
-                    <option value="Lainnya">Lainnya</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Catatan Tambahan</label>
-                <textarea id="editCatatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
-            </div>
-
-            <div class="flex justify-end gap-3 pt-3 border-t">
-                <button type="button" onclick="closeEditModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">Simpan Perubahan</button>
-            </div>
-        </form>
-    </div>
-</div>
 </body>
 </html>
