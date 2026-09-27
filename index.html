@@ -780,13 +780,16 @@ function renderData() {
                     ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
                 </td>
                 <td class="p-3 text-center no-print">
-                    <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
-                        <i data-lucide="edit-2" class="w-4 h-4"></i>
-                    </button>
-                    <button onclick="handleDeleteClick(${g.id})" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data">
-                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    </button>
-                </td>
+    <!-- Tambahkan tanda kutip tunggal '' di sekitar '${g.id}' -->
+    <button onclick="openEditModal('${g.id}')" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
+        <i data-lucide="edit-2" class="w-4 h-4"></i>
+    </button>
+    
+    <!-- Samakan nama fungsi menjadi deleteGuest('${g.id}') -->
+    <button onclick="deleteGuest('${g.id}')" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data">
+        <i data-lucide="trash-2" class="w-4 h-4"></i>
+    </button>
+</td>
             `;
             tbody.appendChild(tr);
         });
