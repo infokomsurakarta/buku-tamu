@@ -815,26 +815,66 @@ function updateStats() {
     if (instansiEl) instansiEl.innerText = uniqueInstansi;
 }
 
-function cleanCSVField(val) {
-    if (val === null || val === undefined) return '""';
-    const str = String(val).replace(/"/g, '""').replace(/[\r\n]+/g, ' ');
-    return `"${str}"`;
+// Helper untuk membersihkan dan mengamankan nilai kolom CSV
+function cleanCSVField(field) {
+    if (field === null || field === undefined) return '""';
+    const stringValue = String(field).replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""');
+    return `"${stringValue}"`;
 }
 
+/**
+ * Handler utama untuk tombol Ekspor CSV (Khusus Mode Admin)
+ */
+function handleExportClick() {
+    // 1. Cek apakah pengguna sudah login sebagai Admin
+    if (!isAdminLoggedIn) {
+        alert('Fitur Ekspor CSV hanya dapat diakses dalam Mode Admin. Silakan login terlebih dahulu.');
+        
+        // Simpan aksi tertunda agar otomatis dieksekusi setelah login berhasil
+        pendingAdminAction = exportToCSV;
+        
+        // Buka modal login jika elemen modal tersedia
+        const modal = document.getElementById('adminLoginModal');
+        if (modal) modal.style.display = 'flex';
+        return;
+    }
+
+    // 2. Eksekusi Ekspor jika sudah dalam Mode Admin
+    exportToCSV();
+}
+
+/**
+ * Fungsi utama Pemroses dan Pengunduh CSV
+ */
 function exportToCSV() {
-    if (guests.length === 0) {
+    // Ambil data terbaru dari variabel 'guests' atau localStorage
+    const dataGuests = (typeof guests !== 'undefined' && Array.isArray(guests) && guests.length > 0)
+        ? guests
+        : JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
+
+    if (!dataGuests || dataGuests.length === 0) {
         alert('Belum ada data kunjungan untuk diekspor!');
         return;
     }
 
-    const headers = ['Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur', 'Pendidikan', 'Pekerjaan', 'Jabatan', 'Email', 'Kontak/HP', 'Instansi/Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'];
+    const headers = [
+        'Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur', 
+        'Pendidikan', 'Pekerjaan', 'Jabatan', 'Email', 
+        'Kontak/HP', 'Instansi/Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'
+    ];
+    
     const csvRows = [headers.join(',')];
 
-    guests.forEach(g => {
-        const dateObj = new Date(g.timestamp);
-        const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-        const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-        const waktu = `${formattedDate} ${formattedTime} WIB`;
+    dataGuests.forEach(g => {
+        let waktu = '-';
+        if (g.timestamp) {
+            const dateObj = new Date(g.timestamp);
+            if (!isNaN(dateObj.getTime())) {
+                const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                waktu = `${formattedDate} ${formattedTime} WIB`;
+            }
+        }
 
         const row = [
             cleanCSVField(waktu),
@@ -845,7 +885,7 @@ function exportToCSV() {
             cleanCSVField(g.pekerjaan),
             cleanCSVField(g.jabatan),
             cleanCSVField(g.email),
-            cleanCSVField(g.kontak),
+            cleanCSVField(g.kontak || g.phone),
             cleanCSVField(g.instansi),
             cleanCSVField(g.komoditas),
             cleanCSVField(g.keperluan),
@@ -854,12 +894,17 @@ function exportToCSV() {
         csvRows.push(row.join(','));
     });
 
+    // Menggunakan UTF-8 BOM ('\ufeff') agar karakter khusus/Aksen di Excel tampil rapi
     const blob = new Blob(['\ufeff' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
+    
     const a = document.createElement('a');
     a.href = url;
     a.download = `buku_tamu_BPOM_Surakarta_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
     a.click();
+    
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
 
