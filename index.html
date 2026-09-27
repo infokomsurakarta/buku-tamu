@@ -969,7 +969,7 @@ function saveEdit(e) {
 
 function deleteGuest(id) {
     if (confirm('Apakah Anda yakin ingin menghapus catatan tamu ini?')) {
-        guests = guests.filter(g => Number(g.id) !== Number(id));
+        guests = guests.filter(g => String(g.id) !== String(id));
         localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
 
         if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
