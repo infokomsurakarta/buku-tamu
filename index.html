@@ -229,6 +229,10 @@
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan *</label>
             <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT XYZ">
         </div>
+		<div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">ALAMAT *</label>
+        <input type="text" id="alamat" autocomplete="off" placeholder="Jl. Slamet Riyadi No. 12, Surakarta" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
+    	</div>
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jabatan</label>
             <input type="text" id="jabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Staf / Manager / Pemilik">
@@ -655,6 +659,7 @@ document.getElementById('guestForm')?.addEventListener('submit', (e) => {
         email: document.getElementById('email').value.trim() || '-',
         kontak: document.getElementById('kontak').value.trim() || '-',
         instansi: document.getElementById('instansi').value.trim() || '-',
+		alamat: document.getElementById('alamat').value.trim() || '-',
         komoditas: finalKomoditas || '-',
         keperluan: document.getElementById('keperluan').value,
         catatan: document.getElementById('catatan').value.trim() || '-'
