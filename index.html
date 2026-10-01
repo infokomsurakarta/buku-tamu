@@ -440,6 +440,10 @@
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
             <input type="text" id="editInstansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
+		<div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Alamat</label>
+            <input type="text" id="editAlamat" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jabatan</label>
             <input type="text" id="editJabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
@@ -959,7 +963,7 @@ function openEditModal(id) {
     document.getElementById('editEmail').value = guest.email || '';
     document.getElementById('editKontak').value = guest.kontak || '';
     document.getElementById('editInstansi').value = guest.instansi || '';
-    
+    document.getElementById('editAlamat').value = guest.alamat || '';
     // Penanganan opsi komoditas pada modal edit
     const editKomoditasSelect = document.getElementById('editKomoditas');
     const editKomoditasWrapper = document.getElementById('editKomoditasLainnyaWrapper');
@@ -1011,6 +1015,7 @@ function saveEdit(e) {
         guests[index].email = document.getElementById('editEmail').value.trim();
         guests[index].kontak = document.getElementById('editKontak').value.trim();
         guests[index].instansi = document.getElementById('editInstansi').value.trim();
+		guests[index].alamat = document.getElementById('editAlamat').value.trim();
         guests[index].komoditas = finalKomoditas;
         guests[index].keperluan = document.getElementById('editKeperluan').value;
         
