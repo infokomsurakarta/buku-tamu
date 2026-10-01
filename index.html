@@ -886,7 +886,7 @@ function exportToCSV() {
     const headers = [
         'Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur', 
         'Pendidikan', 'Pekerjaan', 'Jabatan', 'Email', 
-        'Kontak/HP', 'Instansi/Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'
+        'Kontak/HP', 'Instansi', 'Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'
     ];
     
     const csvRows = [headers.join(',')];
@@ -913,6 +913,7 @@ function exportToCSV() {
             cleanCSVField(g.email),
             cleanCSVField(g.kontak || g.phone),
             cleanCSVField(g.instansi),
+			cleanCSVField(g.alamat),
             cleanCSVField(g.komoditas),
             cleanCSVField(g.keperluan),
             cleanCSVField(g.catatan)
