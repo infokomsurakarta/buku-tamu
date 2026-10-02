@@ -494,13 +494,37 @@
         &copy; Balai Pengawas Obat dan Makanan di Surakarta. All rights reserved.
     </footer>
 
-    <script>
+   <script>
 // Konfigurasi Admin
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
-const ADMIN_PIN = "5010474"; // Disarankan menggunakan enkripsi/hashing untuk penggunaan produksi
-
 let isAdminLoggedIn = false;
 let pendingAdminAction = null;
+
+/**
+ * Memeriksa PIN Admin ke backend secara asinkron
+ * @param {string} pinInput - PIN yang dimasukkan oleh user
+ * @returns {Promise<boolean>} True jika PIN cocok, False jika salah/error
+ */
+async function verifyAdminPinWithBackend(pinInput) {
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8', 
+      },
+      body: JSON.stringify({
+        action: 'verifyAdminPin',
+        pin: pinInput
+      })
+    });
+
+    const result = await response.json();
+    return result.success === true;
+  } catch (error) {
+    console.error('Gagal memverifikasi PIN ke backend:', error);
+    return false;
+  }
+}
 
 // Inisialisasi Data
 let guests = JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
@@ -514,6 +538,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) lucide.createIcons();
     startLiveClock();
     setupKomoditasToggle();
+
+    // Listener Form Login Admin
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLoginSubmit);
+    }
+
+    // Listener Form Edit Data
+    const editForm = document.getElementById('editForm');
+    if (editForm) {
+        editForm.addEventListener('submit', saveEdit);
+    }
 });
 
 function startLiveClock() {
@@ -615,9 +651,13 @@ function openLoginModal(actionCallback = null) {
     const modal = document.getElementById('loginModal');
     if (modal) {
         modal.classList.remove('hidden');
-        document.getElementById('pinInput').value = '';
-        document.getElementById('loginError').classList.add('hidden');
-        document.getElementById('pinInput').focus();
+        const pinInput = document.getElementById('pinInput');
+        if (pinInput) {
+            pinInput.value = '';
+            pinInput.focus();
+        }
+        const loginError = document.getElementById('loginError');
+        if (loginError) loginError.classList.add('hidden');
     }
 }
 
@@ -627,26 +667,49 @@ function closeLoginModal() {
     pendingAdminAction = null;
 }
 
-function handleLoginSubmit(e) {
-    e.preventDefault();
-    const inputPin = document.getElementById('pinInput').value;
-    if (inputPin === ADMIN_PIN) {
+/**
+ * PROSES SUBMIT LOGIN ADMIN (DIPERBAIKI DENGAN VERIFIKASI ASINKRON)
+ */
+async function handleLoginSubmit(e) {
+    if (e) e.preventDefault();
+    
+    const pinInputEl = document.getElementById('pinInput');
+    const loginError = document.getElementById('loginError');
+    const submitBtn = document.querySelector('#loginModal button[type="submit"]');
+
+    if (!pinInputEl) return;
+    const inputPin = pinInputEl.value.trim();
+
+    // Indikator loading tombol
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Memverifikasi...";
+    }
+
+    const isPinValid = await verifyAdminPinWithBackend(inputPin);
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Konfirmasi";
+    }
+
+    if (isPinValid) {
         isAdminLoggedIn = true;
         closeLoginModal();
         updateAdminView();
-        if (pendingAdminAction) {
+
+        if (typeof pendingAdminAction === 'function') {
             pendingAdminAction();
             pendingAdminAction = null;
         }
     } else {
-        document.getElementById('loginError').classList.remove('hidden');
+        if (loginError) loginError.classList.remove('hidden');
     }
 }
 
 document.getElementById('guestForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const genderSelected = document.querySelector('input[name="gender"]:checked');
-    
     const komoditasSelect = document.getElementById('komoditas').value;
     const komoditasLain = document.getElementById('komoditasLainnya')?.value.trim();
     const finalKomoditas = (komoditasSelect === 'Yang lain' && komoditasLain) ? komoditasLain : komoditasSelect;
@@ -663,7 +726,7 @@ document.getElementById('guestForm')?.addEventListener('submit', (e) => {
         email: document.getElementById('email').value.trim() || '-',
         kontak: document.getElementById('kontak').value.trim() || '-',
         instansi: document.getElementById('instansi').value.trim() || '-',
-		alamat: document.getElementById('alamat').value.trim() || '-',
+        alamat: document.getElementById('alamat').value.trim() || '-',
         komoditas: finalKomoditas || '-',
         keperluan: document.getElementById('keperluan').value,
         catatan: document.getElementById('catatan').value.trim() || '-'
@@ -810,16 +873,13 @@ function renderData() {
                     ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
                 </td>
                 <td class="p-3 text-center no-print">
-    <!-- Tambahkan tanda kutip tunggal '' di sekitar '${g.id}' -->
-    <button onclick="openEditModal('${g.id}')" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
-        <i data-lucide="edit-2" class="w-4 h-4"></i>
-    </button>
-    
-    <!-- Samakan nama fungsi menjadi deleteGuest('${g.id}') -->
-    <button onclick="deleteGuest('${g.id}')" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data">
-        <i data-lucide="trash-2" class="w-4 h-4"></i>
-    </button>
-</td>
+                    <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
+                        <i data-lucide="edit-2" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="deleteGuest(${g.id})" class="text-slate-400 hover:text-red-600 p-1.5 rounded transition" title="Hapus Data">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </td>
             `;
             tbody.appendChild(tr);
         });
@@ -845,7 +905,6 @@ function updateStats() {
     if (instansiEl) instansiEl.innerText = uniqueInstansi;
 }
 
-// Helper untuk membersihkan dan mengamankan nilai kolom CSV
 function cleanCSVField(field) {
     if (field === null || field === undefined) return '""';
     const stringValue = String(field).replace(/(\r\n|\n|\r)/gm, ' ').replace(/"/g, '""');
@@ -856,20 +915,12 @@ function cleanCSVField(field) {
  * Handler utama untuk tombol Ekspor CSV (Khusus Mode Admin)
  */
 function handleExportClick() {
-    // 1. Cek apakah pengguna sudah login sebagai Admin
     if (!isAdminLoggedIn) {
         alert('Fitur Ekspor CSV hanya dapat diakses dalam Mode Admin. Silakan login terlebih dahulu.');
-        
-        // Simpan aksi tertunda agar otomatis dieksekusi setelah login berhasil
-        pendingAdminAction = exportToCSV;
-        
-        // Buka modal login jika elemen modal tersedia
-        const modal = document.getElementById('adminLoginModal');
-        if (modal) modal.style.display = 'flex';
+        openLoginModal(exportToCSV);
         return;
     }
 
-    // 2. Eksekusi Ekspor jika sudah dalam Mode Admin
     exportToCSV();
 }
 
@@ -877,7 +928,6 @@ function handleExportClick() {
  * Fungsi utama Pemroses dan Pengunduh CSV
  */
 function exportToCSV() {
-    // Ambil data terbaru dari variabel 'guests' atau localStorage
     const dataGuests = (typeof guests !== 'undefined' && Array.isArray(guests) && guests.length > 0)
         ? guests
         : JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
@@ -917,7 +967,7 @@ function exportToCSV() {
             cleanCSVField(g.email),
             cleanCSVField(g.kontak || g.phone),
             cleanCSVField(g.instansi),
-			cleanCSVField(g.alamat),
+            cleanCSVField(g.alamat),
             cleanCSVField(g.komoditas),
             cleanCSVField(g.keperluan),
             cleanCSVField(g.catatan)
@@ -925,7 +975,6 @@ function exportToCSV() {
         csvRows.push(row.join(','));
     });
 
-    // Menggunakan UTF-8 BOM ('\ufeff') agar karakter khusus/Aksen di Excel tampil rapi
     const blob = new Blob(['\ufeff' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     
@@ -958,13 +1007,13 @@ function openEditModal(id) {
     document.getElementById('editGender').value = guest.gender || 'Laki-laki';
     document.getElementById('editUmur').value = guest.umur || '';
     document.getElementById('editPendidikan').value = guest.pendidikan || 'D4 / S1';
-    document.getElementById('editPekerjaan').value = guest.pekerjaan || 'Pegawai swasta';
+    document.getElementById('editPekerjaan').value = guest.pekerjaan || 'Apoteker';
     document.getElementById('editJabatan').value = guest.jabatan || 'Staf';
     document.getElementById('editEmail').value = guest.email || '';
     document.getElementById('editKontak').value = guest.kontak || '';
     document.getElementById('editInstansi').value = guest.instansi || '';
     document.getElementById('editAlamat').value = guest.alamat || '';
-    // Penanganan opsi komoditas pada modal edit
+
     const editKomoditasSelect = document.getElementById('editKomoditas');
     const editKomoditasWrapper = document.getElementById('editKomoditasLainnyaWrapper');
     const editKomoditasLainnyaInput = document.getElementById('editKomoditasLainnya');
@@ -997,7 +1046,7 @@ function closeEditModal() {
 }
 
 function saveEdit(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const id = parseInt(document.getElementById('editGuestId').value);
     const index = guests.findIndex(g => Number(g.id) === Number(id));
 
@@ -1015,7 +1064,8 @@ function saveEdit(e) {
         guests[index].email = document.getElementById('editEmail').value.trim();
         guests[index].kontak = document.getElementById('editKontak').value.trim();
         guests[index].instansi = document.getElementById('editInstansi').value.trim();
-		guests[index].alamat = document.getElementById('editAlamat').value.trim();
+        guests[index].alamat = document.getElementById('editAlamat').value.trim();
+
         guests[index].komoditas = finalKomoditas;
         guests[index].keperluan = document.getElementById('editKeperluan').value;
         
