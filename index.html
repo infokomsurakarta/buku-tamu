@@ -192,23 +192,23 @@
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pekerjaan *</label>
             <select id="pekerjaan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
-        		<option value="">-- Pilih Pekerjaan --</option>
-				<option value="Apoteker">Apoteker</option>
-            	<option value="Bidan">Bidan</option>
-				<option value="Dokter">Dokter</option>
-				<option value="Gokter Gigi">Dokter Gigi</option>
-				<option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
-				<option value="Karyawan">Karyawan</option>
-				<option value="LSM">LSM</option>
-				<option value="Nakes Lain">Nakes Lain</option>
-				<option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
-				<option value="Pelaku Usaha">Pelaku Usaha</option>
-				<option value="Perawat">Perawat</option>
-				<option value="PNS/TNI/POLRI">PNS/TNI/POLRI</option>
-				<option value="Sarjana Hukum">Sarjana Hukum</option>
-				<option value="Tenaga Teknis Kefarmasian">Tenaga Teknis Kefarmasian</option>
-				<option value="Umum">Umum</option>
-            	<option value="Wartawan">Wartawan</option>
+                <option value="">-- Pilih Pekerjaan --</option>
+		<option value="Apoteker">Apoteker</option>
+                <option value="Bidan">Bidan</option>
+		<option value="Dokter">Dokter</option>
+		<option value="Gokter Gigi">Dokter Gigi</option>
+		<option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+		<option value="Karyawan">Karyawan</option>
+		<option value="LSM">LSM</option>
+		<option value="Nakes Lain">Nakes Lain</option>
+		<option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
+		<option value="Pelaku Usaha">Pelaku Usaha</option>
+		<option value="Perawat">Perawat</option>
+		<option value="PNS/TNI/POLRI">PNS/TNI/POLRI</option>
+		<option value="Sarjana Hukum">Sarjana Hukum</option>
+		<option value="Tenaga Teknis Kefarmasian">Tenaga Teknis Kefarmasian</option>
+		<option value="Umum">Umum</option>
+                <option value="Wartawan">Wartawan</option>
             </select>
         </div>
     </div>
@@ -227,12 +227,12 @@
     <div class="grid grid-cols-2 gap-3">
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan *</label>
-            <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT XYZ">
+            <input type="text" id="instansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Dinkes Surakarta / PT. Maju">
         </div>
-		<div>
+	<div>
         <label class="block text-xs font-semibold text-slate-600 mb-1">ALAMAT *</label>
         <input type="text" id="alamat" autocomplete="off" placeholder="Jl. Slamet Riyadi No. 12, Surakarta" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" required>
-    	</div>
+    </div>
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jabatan</label>
             <input type="text" id="jabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Staf / Manager / Pemilik">
@@ -301,6 +301,25 @@
                             </select>
                         </div>
                     </div>
+<!-- Penambahan Filter Waktu -->
+<div class="flex flex-wrap gap-4 mb-4 items-center no-print">
+    <!-- Filter Tanggal Mulai -->
+    <div class="flex items-center gap-2">
+        <label for="filterStartDate" class="text-xs font-semibold text-slate-600">Dari:</label>
+        <input type="date" id="filterStartDate" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+
+    <!-- Filter Tanggal Selesai -->
+    <div class="flex items-center gap-2">
+        <label for="filterEndDate" class="text-xs font-semibold text-slate-600">Sampai:</label>
+        <input type="date" id="filterEndDate" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    </div>
+<!-- Tombol Reset Tanggal -->
+        <button type="button" onclick="resetDateFilter()" class="flex items-center gap-1 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-lg transition border border-slate-300">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Tanggal
+        </button>
+    </div>
+</div>
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
@@ -404,22 +423,22 @@
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pekerjaan</label>
             <select id="editPekerjaan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
                 <option value="">-- Pilih Pekerjaan --</option>
-				<option value="Apoteker">Apoteker</option>
-            	<option value="Bidan">Bidan</option>
-				<option value="Dokter">Dokter</option>
-				<option value="Gokter Gigi">Dokter Gigi</option>
-				<option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
-				<option value="Karyawan">Karyawan</option>
-				<option value="LSM">LSM</option>
-				<option value="Nakes Lain">Nakes Lain</option>
-				<option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
-				<option value="Pelaku Usaha">Pelaku Usaha</option>
-				<option value="Perawat">Perawat</option>
-				<option value="PNS/TNI/POLRI">PNS/TNI/POLRI</option>
-				<option value="Sarjana Hukum">Sarjana Hukum</option>
-				<option value="Tenaga Teknis Kefarmasian">Tenaga Teknis Kefarmasian</option>
-				<option value="Umum">Umum</option>
-            	<option value="Wartawan">Wartawan</option>
+		<option value="Apoteker">Apoteker</option>
+                <option value="Bidan">Bidan</option>
+		<option value="Dokter">Dokter</option>
+		<option value="Gokter Gigi">Dokter Gigi</option>
+		<option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+		<option value="Karyawan">Karyawan</option>
+		<option value="LSM">LSM</option>
+		<option value="Nakes Lain">Nakes Lain</option>
+		<option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
+		<option value="Pelaku Usaha">Pelaku Usaha</option>
+		<option value="Perawat">Perawat</option>
+		<option value="PNS/TNI/POLRI">PNS/TNI/POLRI</option>
+		<option value="Sarjana Hukum">Sarjana Hukum</option>
+		<option value="Tenaga Teknis Kefarmasian">Tenaga Teknis Kefarmasian</option>
+		<option value="Umum">Umum</option>
+                <option value="Wartawan">Wartawan</option>
             </select>
         </div>
     </div>
@@ -440,10 +459,11 @@
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
             <input type="text" id="editInstansi" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
-		<div>
+<div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Alamat</label>
             <input type="text" id="editAlamat" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
+
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jabatan</label>
             <input type="text" id="editJabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
@@ -494,7 +514,7 @@
         &copy; Balai Pengawas Obat dan Makanan di Surakarta. All rights reserved.
     </footer>
 
-   <script>
+    <script>
 // Konfigurasi Admin
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
 let isAdminLoggedIn = false;
@@ -550,6 +570,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (editForm) {
         editForm.addEventListener('submit', saveEdit);
     }
+
+    // Listener untuk Filter Pencarian
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => renderData());
+    }
+
+    // Listener untuk Filter Keperluan
+    const filterKeperluan = document.getElementById('filterKeperluan');
+    if (filterKeperluan) {
+        filterKeperluan.addEventListener('change', () => renderData());
+    }
+
+    // Listener untuk Filter Tanggal Mulai & Selesai
+    const startDateEl = document.getElementById('filterStartDate');
+    const endDateEl = document.getElementById('filterEndDate');
+
+    if (startDateEl) startDateEl.addEventListener('change', () => renderData());
+    if (endDateEl) endDateEl.addEventListener('change', () => renderData());
 });
 
 function startLiveClock() {
@@ -668,7 +707,7 @@ function closeLoginModal() {
 }
 
 /**
- * PROSES SUBMIT LOGIN ADMIN (DIPERBAIKI DENGAN VERIFIKASI ASINKRON)
+ * PROSES SUBMIT LOGIN ADMIN
  */
 async function handleLoginSubmit(e) {
     if (e) e.preventDefault();
@@ -680,7 +719,6 @@ async function handleLoginSubmit(e) {
     if (!pinInputEl) return;
     const inputPin = pinInputEl.value.trim();
 
-    // Indikator loading tombol
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerText = "Memverifikasi...";
@@ -782,16 +820,21 @@ function initCharts() {
     }
 }
 
-function updateCharts() {
+/**
+ * Memperbarui grafik berdasarkan data terfilter
+ */
+function updateCharts(dataToChart) {
     if (!chartGenderInstance || !chartEduInstance || !chartAgeInstance) return;
 
-    const male = guests.filter(g => g.gender === 'Laki-laki').length;
-    const female = guests.filter(g => g.gender === 'Perempuan').length;
+    const targetData = Array.isArray(dataToChart) ? dataToChart : guests;
+
+    const male = targetData.filter(g => g.gender === 'Laki-laki').length;
+    const female = targetData.filter(g => g.gender === 'Perempuan').length;
     chartGenderInstance.data.datasets[0].data = [male, female];
     chartGenderInstance.update();
 
     const eduCounts = { 'SD/SMP': 0, 'SMA': 0, 'D1-D3': 0, 'D4/S1': 0, 'S2/S3': 0 };
-    guests.forEach(g => {
+    targetData.forEach(g => {
         if (g.pendidikan === 'SD / Sederajat' || g.pendidikan === 'SMP / Sederajat') eduCounts['SD/SMP']++;
         else if (g.pendidikan === 'SMA / SMK / Sederajat') eduCounts['SMA']++;
         else if (g.pendidikan === 'D1 / D2 / D3') eduCounts['D1-D3']++;
@@ -802,7 +845,7 @@ function updateCharts() {
     chartEduInstance.update();
 
     let ageGroup = [0, 0, 0, 0];
-    guests.forEach(g => {
+    targetData.forEach(g => {
         const u = parseInt(g.umur) || 0;
         if (u > 0 && u < 20) ageGroup[0]++;
         else if (u >= 20 && u <= 39) ageGroup[1]++;
@@ -813,6 +856,29 @@ function updateCharts() {
     chartAgeInstance.update();
 }
 
+/**
+ * Memperbarui statistik kartu ringkasan secara dinamis berdasarkan data terfilter
+ */
+function updateStats(dataToStats) {
+    const totalEl = document.getElementById('statTotal');
+    const todayEl = document.getElementById('statToday');
+    const instansiEl = document.getElementById('statInstansi');
+
+    const targetData = Array.isArray(dataToStats) ? dataToStats : guests;
+
+    // 1. Total Tamu (berdasarkan hasil filter)
+    if (totalEl) totalEl.innerText = targetData.length;
+
+    // 2. Tamu Hari Ini (dari data terfilter yang tanggalnya adalah hari ini)
+    const todayStr = new Date().toDateString();
+    const todayCount = targetData.filter(g => new Date(g.timestamp).toDateString() === todayStr).length;
+    if (todayEl) todayEl.innerText = todayCount;
+
+    // 3. Instansi Unik (dari data terfilter)
+    const uniqueInstansi = new Set(targetData.map(g => (g.instansi || '').toLowerCase().trim())).size;
+    if (instansiEl) instansiEl.innerText = uniqueInstansi;
+}
+
 function renderData() {
     if (!isAdminLoggedIn) return;
 
@@ -821,14 +887,30 @@ function renderData() {
     const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
     const filter = document.getElementById('filterKeperluan')?.value || '';
 
+    // Ambil nilai dari input filter tanggal
+    const startDateVal = document.getElementById('filterStartDate')?.value;
+    const endDateVal = document.getElementById('filterEndDate')?.value;
+
     if (!tbody) return;
 
     const filteredGuests = guests.filter(g => {
         const matchSearch = (g.nama || '').toLowerCase().includes(search) || 
-                            (g.instansi || '').toLowerCase().includes(search) ||
-                            (g.email || '').toLowerCase().includes(search);
+                          (g.instansi || '').toLowerCase().includes(search) ||
+                          (g.email || '').toLowerCase().includes(search);
         const matchFilter = filter === '' || g.keperluan === filter;
-        return matchSearch && matchFilter;
+        
+        let matchDate = true;
+        if (g.timestamp) {
+            const guestDateStr = new Date(g.timestamp).toISOString().split('T')[0];
+            if (startDateVal && guestDateStr < startDateVal) {
+                matchDate = false;
+            }
+            if (endDateVal && guestDateStr > endDateVal) {
+                matchDate = false;
+            }
+        }
+
+        return matchSearch && matchFilter && matchDate;
     });
 
     tbody.innerHTML = '';
@@ -886,23 +968,24 @@ function renderData() {
     }
 
     if (window.lucide) lucide.createIcons();
-    updateStats();
-    updateCharts();
+    
+    // Perbarui statistik dan grafik secara dinamis berdasarkan data hasil filter
+    updateStats(filteredGuests);
+    updateCharts(filteredGuests);
 }
 
-function updateStats() {
-    const totalEl = document.getElementById('statTotal');
-    const todayEl = document.getElementById('statToday');
-    const instansiEl = document.getElementById('statInstansi');
+/**
+ * Mengosongkan nilai input tanggal mulai dan tanggal selesai, 
+ * lalu memperbarui kembali tabel, statistik, dan grafik.
+ */
+function resetDateFilter() {
+    const startDateEl = document.getElementById('filterStartDate');
+    const endDateEl = document.getElementById('filterEndDate');
 
-    if (totalEl) totalEl.innerText = guests.length;
+    if (startDateEl) startDateEl.value = '';
+    if (endDateEl) endDateEl.value = '';
 
-    const todayStr = new Date().toDateString();
-    const todayCount = guests.filter(g => new Date(g.timestamp).toDateString() === todayStr).length;
-    if (todayEl) todayEl.innerText = todayCount;
-
-    const uniqueInstansi = new Set(guests.map(g => (g.instansi || '').toLowerCase().trim())).size;
-    if (instansiEl) instansiEl.innerText = uniqueInstansi;
+    renderData();
 }
 
 function cleanCSVField(field) {
@@ -911,9 +994,6 @@ function cleanCSVField(field) {
     return `"${stringValue}"`;
 }
 
-/**
- * Handler utama untuk tombol Ekspor CSV (Khusus Mode Admin)
- */
 function handleExportClick() {
     if (!isAdminLoggedIn) {
         alert('Fitur Ekspor CSV hanya dapat diakses dalam Mode Admin. Silakan login terlebih dahulu.');
@@ -924,9 +1004,6 @@ function handleExportClick() {
     exportToCSV();
 }
 
-/**
- * Fungsi utama Pemroses dan Pengunduh CSV
- */
 function exportToCSV() {
     const dataGuests = (typeof guests !== 'undefined' && Array.isArray(guests) && guests.length > 0)
         ? guests
