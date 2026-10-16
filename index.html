@@ -1005,12 +1005,45 @@ function handleExportClick() {
 }
 
 function exportToCSV() {
+    // Ambil data dari variabel global atau localStorage
     const dataGuests = (typeof guests !== 'undefined' && Array.isArray(guests) && guests.length > 0)
         ? guests
         : JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
 
     if (!dataGuests || dataGuests.length === 0) {
         alert('Belum ada data kunjungan untuk diekspor!');
+        return;
+    }
+
+    // Ambil nilai filter yang sedang aktif di UI
+    const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const filter = document.getElementById('filterKeperluan')?.value || '';
+    const startDateVal = document.getElementById('filterStartDate')?.value;
+    const endDateVal = document.getElementById('filterEndDate')?.value;
+
+    // Terapkan filter yang sama persis seperti pada fungsi renderData()
+    const filteredGuests = dataGuests.filter(g => {
+        const matchSearch = (g.nama || '').toLowerCase().includes(search) || 
+                            (g.instansi || '').toLowerCase().includes(search) ||
+                            (g.email || '').toLowerCase().includes(search);
+        const matchFilter = filter === '' || g.keperluan === filter;
+        
+        let matchDate = true;
+        if (g.timestamp) {
+            const guestDateStr = new Date(g.timestamp).toISOString().split('T')[0];
+            if (startDateVal && guestDateStr < startDateVal) {
+                matchDate = false;
+            }
+            if (endDateVal && guestDateStr > endDateVal) {
+                matchDate = false;
+            }
+        }
+
+        return matchSearch && matchFilter && matchDate;
+    });
+
+    if (filteredGuests.length === 0) {
+        alert('Tidak ada data yang sesuai dengan filter pencarian/tanggal saat ini untuk diekspor.');
         return;
     }
 
@@ -1022,7 +1055,7 @@ function exportToCSV() {
     
     const csvRows = [headers.join(',')];
 
-    dataGuests.forEach(g => {
+    filteredGuests.forEach(g => {
         let waktu = '-';
         if (g.timestamp) {
             const dateObj = new Date(g.timestamp);
@@ -1057,7 +1090,7 @@ function exportToCSV() {
     
     const a = document.createElement('a');
     a.href = url;
-    a.download = `buku_tamu_BPOM_Surakarta_${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `buku_tamu_BPOM_Surakarta_filtered_${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     
