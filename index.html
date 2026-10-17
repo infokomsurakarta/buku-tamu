@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-	
+
         <!-- Panel Grafik Demografi -->
 	
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 no-print">
@@ -174,7 +174,6 @@
             <input type="number" id="umur" min="1" max="120" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contoh: 30">
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-3">
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Pendidikan Terakhir *</label>
@@ -212,7 +211,6 @@
             </select>
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-3">
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp *</label>
@@ -223,7 +221,6 @@
             <input type="email" id="email" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="nama@email.com">
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-3">
         <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Instansi / Perusahaan *</label>
@@ -238,7 +235,6 @@
             <input type="text" id="jabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Staf / Manager / Pemilik">
         </div>
     </div>
-
     <div>
         <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Jenis Komoditas (Pelaku Usaha)</label>
         <select id="komoditas" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
@@ -251,7 +247,6 @@
             <option value="Kuasi / SK">Kuasi / SK</option>
         </select>
     </div>
-
     <div>
         <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Keperluan Kunjungan *</label>
         <select id="keperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-white">
@@ -265,12 +260,10 @@
             <option value="Lainnya">Lainnya</option>
         </select>
     </div>
-
     <div>
         <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Detail Keperluan / Ditemui</label>
         <textarea id="catatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Bertemu dengan tim substansi..."></textarea>
     </div>
-
     <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow-md">
         <i data-lucide="send" class="w-4 h-4"></i> Simpan Registrasi Tamu
     </button>
@@ -279,11 +272,9 @@
             </div>
 
             <!-- Tabel Data Tamu -->
-	
             <div class="lg:col-span-2 space-y-4">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6 no-print">
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6 no-print">
                         <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
                             <i data-lucide="list" class="w-5 h-5 text-emerald-600"></i> Riwayat Kunjungan
                         </h2>
@@ -308,7 +299,6 @@
         <label for="filterStartDate" class="text-xs font-semibold text-slate-600">Dari:</label>
         <input type="date" id="filterStartDate" class="border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
     </div>
-
     <!-- Filter Tanggal Selesai -->
     <div class="flex items-center gap-2">
         <label for="filterEndDate" class="text-xs font-semibold text-slate-600">Sampai:</label>
@@ -320,7 +310,6 @@
         </button>
     </div>
 </div>
-
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
@@ -340,10 +329,8 @@
                             <p>Belum ada riwayat kunjungan tamu.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
-	
         </div>
     </main>
 
@@ -382,15 +369,12 @@
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
-
 <form id="editGuestForm" onsubmit="saveEdit(event)" class="space-y-4">
     <input type="hidden" id="editGuestId">
-
     <div>
         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Nama Lengkap</label>
         <input type="text" id="editNama" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
     </div>
-
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Kelamin</label>
@@ -404,7 +388,6 @@
             <input type="number" id="editUmur" required min="1" max="120" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Pendidikan</label>
@@ -442,7 +425,6 @@
             </select>
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">No. WhatsApp</label>
@@ -453,7 +435,6 @@
             <input type="email" id="editEmail" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
     </div>
-
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Instansi / Organisasi</label>
@@ -463,13 +444,11 @@
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Alamat</label>
             <input type="text" id="editAlamat" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
-
         <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jabatan</label>
             <input type="text" id="editJabatan" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
         </div>
     </div>
-
     <div>
         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Jenis Komoditas (Pelaku Usaha)</label>
         <select id="editKomoditas" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
@@ -482,7 +461,6 @@
             <option value="Kuasi / SK">Kuasi / SK</option>
         </select>
     </div>
-
     <div>
         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Keperluan Kunjungan</label>
         <select id="editKeperluan" required class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
@@ -495,12 +473,15 @@
             <option value="Lainnya">Lainnya</option>
         </select>
     </div>
-
     <div>
         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Catatan Tambahan</label>
         <textarea id="editCatatan" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
     </div>
-
+<!-- Input Tambahan pada Modal Edit Data Tamu -->
+<div>
+    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Petugas Penerima / Petugas Layanan</label>
+    <input type="text" id="editPetugas" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-50" placeholder="Nama Petugas BPOM yang melayani...">
+</div>
     <div class="flex justify-end gap-3 pt-3 border-t">
         <button type="button" onclick="closeEditModal()" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
         <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition">Simpan Perubahan</button>
@@ -508,8 +489,6 @@
 </form>
     </div>
 </div>
-
-
     <footer class="text-center py-6 text-xs text-slate-400 border-t border-slate-200 mt-12 bg-white no-print">
         &copy; Balai Pengawas Obat dan Makanan di Surakarta. All rights reserved.
     </footer>
@@ -519,7 +498,6 @@
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB5QKhILj-F0fq_Sg5T_Q2birpc8R7SyzcGGlY2-cY8c6llXSR8HWX1zBFGNqovtt4ww/exec'; 
 let isAdminLoggedIn = false;
 let pendingAdminAction = null;
-
 /**
  * Memeriksa PIN Admin ke backend secara asinkron
  * @param {string} pinInput - PIN yang dimasukkan oleh user
@@ -537,7 +515,6 @@ async function verifyAdminPinWithBackend(pinInput) {
         pin: pinInput
       })
     });
-
     const result = await response.json();
     return result.success === true;
   } catch (error) {
@@ -545,48 +522,40 @@ async function verifyAdminPinWithBackend(pinInput) {
     return false;
   }
 }
-
 // Inisialisasi Data
 let guests = JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
 let chartGenderInstance = null;
 let chartEduInstance = null;
 let chartAgeInstance = null;
-
 document.addEventListener('DOMContentLoaded', () => {
     initCharts();
     updateAdminView();
     if (window.lucide) lucide.createIcons();
     startLiveClock();
     setupKomoditasToggle();
-
-    // Listener Form Login Admin
+// Listener Form Login Admin
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLoginSubmit);
     }
-
-    // Listener Form Edit Data
+// Listener Form Edit Data
     const editForm = document.getElementById('editForm');
     if (editForm) {
         editForm.addEventListener('submit', saveEdit);
     }
-
-    // Listener untuk Filter Pencarian
+// Listener untuk Filter Pencarian
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('input', () => renderData());
     }
-
-    // Listener untuk Filter Keperluan
+// Listener untuk Filter Keperluan
     const filterKeperluan = document.getElementById('filterKeperluan');
     if (filterKeperluan) {
         filterKeperluan.addEventListener('change', () => renderData());
     }
-
-    // Listener untuk Filter Tanggal Mulai & Selesai
+// Listener untuk Filter Tanggal Mulai & Selesai
     const startDateEl = document.getElementById('filterStartDate');
     const endDateEl = document.getElementById('filterEndDate');
-
     if (startDateEl) startDateEl.addEventListener('change', () => renderData());
     if (endDateEl) endDateEl.addEventListener('change', () => renderData());
 });
@@ -614,7 +583,6 @@ function setupKomoditasToggle() {
             });
         }
     };
-
     setupToggle('komoditas', 'komoditasLainnyaWrapper');
     setupToggle('editKomoditas', 'editKomoditasLainnyaWrapper');
 }
@@ -624,7 +592,6 @@ function updateAdminView() {
     const adminBadge = document.getElementById('adminBadge');
     const adminBtnText = document.getElementById('adminBtnText');
     const adminAuthBtn = document.getElementById('adminAuthBtn');
-
     if (isAdminLoggedIn) {
         if (adminOnlySection) adminOnlySection.classList.remove('hidden');
         if (adminBadge) adminBadge.classList.remove('hidden');
@@ -643,8 +610,7 @@ function updateAdminView() {
             adminAuthBtn.classList.replace('bg-rose-600', 'bg-indigo-600');
             adminAuthBtn.classList.replace('hover:bg-rose-700', 'hover:bg-indigo-700');
         }
-        
-        const tbody = document.getElementById('guestTableBody');
+       const tbody = document.getElementById('guestTableBody');
         if (tbody) tbody.innerHTML = '';
     }
 }
@@ -654,12 +620,10 @@ function fetchDataFromSheets() {
         renderData();
         return;
     }
-
     const tbody = document.getElementById('guestTableBody');
     if (tbody) {
         tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Memuat data dari server...</td></tr>';
     }
-
     fetch(SCRIPT_URL)
         .then(response => response.json())
         .then(res => {
@@ -711,31 +675,24 @@ function closeLoginModal() {
  */
 async function handleLoginSubmit(e) {
     if (e) e.preventDefault();
-    
-    const pinInputEl = document.getElementById('pinInput');
+        const pinInputEl = document.getElementById('pinInput');
     const loginError = document.getElementById('loginError');
     const submitBtn = document.querySelector('#loginModal button[type="submit"]');
-
     if (!pinInputEl) return;
     const inputPin = pinInputEl.value.trim();
-
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerText = "Memverifikasi...";
     }
-
     const isPinValid = await verifyAdminPinWithBackend(inputPin);
-
     if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerText = "Konfirmasi";
     }
-
     if (isPinValid) {
         isAdminLoggedIn = true;
         closeLoginModal();
         updateAdminView();
-
         if (typeof pendingAdminAction === 'function') {
             pendingAdminAction();
             pendingAdminAction = null;
@@ -744,14 +701,12 @@ async function handleLoginSubmit(e) {
         if (loginError) loginError.classList.remove('hidden');
     }
 }
-
 document.getElementById('guestForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const genderSelected = document.querySelector('input[name="gender"]:checked');
     const komoditasSelect = document.getElementById('komoditas').value;
     const komoditasLain = document.getElementById('komoditasLainnya')?.value.trim();
     const finalKomoditas = (komoditasSelect === 'Yang lain' && komoditasLain) ? komoditasLain : komoditasSelect;
-
     const newGuest = {
         id: Date.now(),
         timestamp: new Date().toISOString(),
@@ -767,9 +722,9 @@ document.getElementById('guestForm')?.addEventListener('submit', (e) => {
         alamat: document.getElementById('alamat').value.trim() || '-',
         komoditas: finalKomoditas || '-',
         keperluan: document.getElementById('keperluan').value,
-        catatan: document.getElementById('catatan').value.trim() || '-'
+        catatan: document.getElementById('catatan').value.trim() || '-',
+	petugas: '-' // Field petugas otomatis terisi default '-' untuk publik
     };
-
     guests.unshift(newGuest);
     localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
 
@@ -781,7 +736,6 @@ document.getElementById('guestForm')?.addEventListener('submit', (e) => {
             body: JSON.stringify(newGuest)
         }).catch(err => console.error("Error kirim data:", err));
     }
-
     document.getElementById('guestForm').reset();
     document.getElementById('komoditasLainnyaWrapper')?.classList.add('hidden');
     alert('Terima kasih! Data kunjungan Anda berhasil disimpan.');
@@ -800,7 +754,6 @@ function initCharts() {
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
         });
     }
-
     const ctxEdu = document.getElementById('eduChart')?.getContext('2d');
     if (ctxEdu) {
         chartEduInstance = new Chart(ctxEdu, {
@@ -809,7 +762,6 @@ function initCharts() {
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
         });
     }
-
     const ctxAge = document.getElementById('ageChart')?.getContext('2d');
     if (ctxAge) {
         chartAgeInstance = new Chart(ctxAge, {
@@ -832,7 +784,6 @@ function updateCharts(dataToChart) {
     const female = targetData.filter(g => g.gender === 'Perempuan').length;
     chartGenderInstance.data.datasets[0].data = [male, female];
     chartGenderInstance.update();
-
     const eduCounts = { 'SD/SMP': 0, 'SMA': 0, 'D1-D3': 0, 'D4/S1': 0, 'S2/S3': 0 };
     targetData.forEach(g => {
         if (g.pendidikan === 'SD / Sederajat' || g.pendidikan === 'SMP / Sederajat') eduCounts['SD/SMP']++;
@@ -843,7 +794,6 @@ function updateCharts(dataToChart) {
     });
     chartEduInstance.data.datasets[0].data = Object.values(eduCounts);
     chartEduInstance.update();
-
     let ageGroup = [0, 0, 0, 0];
     targetData.forEach(g => {
         const u = parseInt(g.umur) || 0;
@@ -863,7 +813,6 @@ function updateStats(dataToStats) {
     const totalEl = document.getElementById('statTotal');
     const todayEl = document.getElementById('statToday');
     const instansiEl = document.getElementById('statInstansi');
-
     const targetData = Array.isArray(dataToStats) ? dataToStats : guests;
 
     // 1. Total Tamu (berdasarkan hasil filter)
@@ -881,7 +830,6 @@ function updateStats(dataToStats) {
 
 function renderData() {
     if (!isAdminLoggedIn) return;
-
     const tbody = document.getElementById('guestTableBody');
     const emptyState = document.getElementById('emptyState');
     const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
@@ -890,9 +838,7 @@ function renderData() {
     // Ambil nilai dari input filter tanggal
     const startDateVal = document.getElementById('filterStartDate')?.value;
     const endDateVal = document.getElementById('filterEndDate')?.value;
-
     if (!tbody) return;
-
     const filteredGuests = guests.filter(g => {
         const matchSearch = (g.nama || '').toLowerCase().includes(search) || 
                           (g.instansi || '').toLowerCase().includes(search) ||
@@ -909,10 +855,8 @@ function renderData() {
                 matchDate = false;
             }
         }
-
         return matchSearch && matchFilter && matchDate;
     });
-
     tbody.innerHTML = '';
     if (filteredGuests.length === 0) {
         if (emptyState) emptyState.classList.remove('hidden');
@@ -953,6 +897,7 @@ function renderData() {
                         ${escapeHtml(g.keperluan)}
                     </span>
                     ${g.catatan && g.catatan !== '-' ? `<p class="text-xs text-slate-500 mt-1 italic">"${escapeHtml(g.catatan)}"</p>` : ''}
+	            ${g.petugas && g.petugas !== '-' ? `<p class="text-[11px] text-indigo-600 font-medium mt-1.5 flex items-center gap-1"><i data-lucide="user-check" class="w-3 h-3"></i> Petugas: ${escapeHtml(g.petugas)}</p>` : ''}
                 </td>
                 <td class="p-3 text-center no-print">
                     <button onclick="openEditModal(${g.id})" class="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="Edit Data">
@@ -966,7 +911,6 @@ function renderData() {
             tbody.appendChild(tr);
         });
     }
-
     if (window.lucide) lucide.createIcons();
     
     // Perbarui statistik dan grafik secara dinamis berdasarkan data hasil filter
@@ -981,10 +925,8 @@ function renderData() {
 function resetDateFilter() {
     const startDateEl = document.getElementById('filterStartDate');
     const endDateEl = document.getElementById('filterEndDate');
-
     if (startDateEl) startDateEl.value = '';
     if (endDateEl) endDateEl.value = '';
-
     renderData();
 }
 
@@ -1009,7 +951,6 @@ function exportToCSV() {
     const dataGuests = (typeof guests !== 'undefined' && Array.isArray(guests) && guests.length > 0)
         ? guests
         : JSON.parse(localStorage.getItem('bpom_surakarta_guestbook')) || [];
-
     if (!dataGuests || dataGuests.length === 0) {
         alert('Belum ada data kunjungan untuk diekspor!');
         return;
@@ -1050,7 +991,7 @@ function exportToCSV() {
     const headers = [
         'Waktu Kunjungan', 'Nama Lengkap', 'Jenis Kelamin', 'Umur', 
         'Pendidikan', 'Pekerjaan', 'Jabatan', 'Email', 
-        'Kontak/HP', 'Instansi', 'Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan'
+        'Kontak/HP', 'Instansi', 'Alamat', 'Jenis Komoditas', 'Keperluan', 'Catatan','Petugas'
     ];
     
     const csvRows = [headers.join(',')];
@@ -1080,7 +1021,8 @@ function exportToCSV() {
             cleanCSVField(g.alamat),
             cleanCSVField(g.komoditas),
             cleanCSVField(g.keperluan),
-            cleanCSVField(g.catatan)
+            cleanCSVField(g.catatan),
+	    cleanCSVField(g.petugas)
         ];
         csvRows.push(row.join(','));
     });
@@ -1123,6 +1065,11 @@ function openEditModal(id) {
     document.getElementById('editKontak').value = guest.kontak || '';
     document.getElementById('editInstansi').value = guest.instansi || '';
     document.getElementById('editAlamat').value = guest.alamat || '';
+    // Field Petugas Penerima / Layanan
+    const editPetugasInput = document.getElementById('editPetugas');
+    if (editPetugasInput) {
+        editPetugasInput.value = guest.petugas && guest.petugas !== '-' ? guest.petugas : '';
+    }
 
     const editKomoditasSelect = document.getElementById('editKomoditas');
     const editKomoditasWrapper = document.getElementById('editKomoditasLainnyaWrapper');
@@ -1175,13 +1122,13 @@ function saveEdit(e) {
         guests[index].kontak = document.getElementById('editKontak').value.trim();
         guests[index].instansi = document.getElementById('editInstansi').value.trim();
         guests[index].alamat = document.getElementById('editAlamat').value.trim();
-
         guests[index].komoditas = finalKomoditas;
         guests[index].keperluan = document.getElementById('editKeperluan').value;
-        
         const catatanInput = document.getElementById('editCatatan');
         guests[index].catatan = catatanInput ? catatanInput.value.trim() : (guests[index].catatan || '-');
-
+	// Simpan Isian Petugas
+        const petugasInput = document.getElementById('editPetugas');
+        guests[index].petugas = petugasInput ? (petugasInput.value.trim() || '-') : (guests[index].petugas || '-');
         localStorage.setItem('bpom_surakarta_guestbook', JSON.stringify(guests));
 
         if (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL !== '') {
